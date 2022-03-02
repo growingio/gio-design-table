@@ -1,0 +1,20 @@
+{
+  "DataTable.item": [
+    {
+      "type": 0,
+      "value": "items"
+    }
+  ],
+  "DataTable.selected": [
+    {
+      "type": 0,
+      "value": "selected"
+    }
+  ],
+  "DataTable.sum": [
+    {
+      "type": 0,
+      "value": "SUM"
+    }
+  ]
+}

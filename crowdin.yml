@@ -1,0 +1,12 @@
+'project_id': '502438'
+'api_token': 'your api token'
+# "preserve_hierarchy": true
+# "branch": "master" // optional
+# "base_url": "https://{organization-name}.crowdin.com" // optional (for Crowdin Enterprise only)
+'files':
+  [
+    {
+      'source': 'locales/gio-design-table.json',
+      'translation': 'locales/translations/%two_letters_code%/%original_file_name%',
+    },
+  ]
