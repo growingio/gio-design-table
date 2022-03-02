@@ -1,4 +1,4 @@
-import { Data } from '@antv/s2';
+import { Data, SortParams } from '@antv/s2';
 import { ComponentStory, Story } from '@storybook/react';
 import { ChangeEventHandler, useRef, useState } from 'react';
 import { Adaptive, SheetProps } from '../..';
@@ -187,7 +187,6 @@ export const BackgroundAnnotation = () => {
           {
             field: 'number',
             mapping(fieldValue, data) {
-              console.log('data', data, fieldValue)
               return {
                 // fill 是背景字段下唯一必须的字段，用于指定文本颜色
                 fill: '',
@@ -207,7 +206,8 @@ export const BackgroundAnnotation = () => {
       meta: dataCfg.meta,
       data: dataCfg.data,
       totalData: dataCfg.totalData as any
-    }
+    },
+    onSortChange: (params: SortParams) => { console.log('onSortChange', params) }
   }
   return (<div className='table-demo-box'>
     <DataTable {...props}></DataTable>

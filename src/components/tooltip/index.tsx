@@ -30,7 +30,7 @@ const MESSAGES: { [key: string]: any; } = {
   zh: {},
 };
 export const TooltipComponent: React.FC<TooltipRenderProps> = (props) => {
-  const { data, options, content } = props;
+  const { data, options, content, cell } = props;
   const context = useContext(DesignContext);
   const localeCode = context?.locale?.code || 'zh-CN';
   const renderDivider = () => {
@@ -47,6 +47,7 @@ export const TooltipComponent: React.FC<TooltipRenderProps> = (props) => {
           onClick={operator.onClick}
           menus={operator.menus}
           onlyMenu={onlyMenu}
+          cell={cell}
         />
       ) : null
     );

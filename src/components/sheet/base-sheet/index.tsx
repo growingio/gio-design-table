@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import {
-  S2Options,
   SpreadSheet,
   getSafetyDataConfig
 } from '@antv/s2';

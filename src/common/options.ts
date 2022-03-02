@@ -8,26 +8,11 @@ export const SHEET_COMPONENT_DEFAULT_OPTIONS: Readonly<Partial<S2Options>> = {
     col: {
       showTooltip: true,
       operation: {
-        hiddenColumns: false,
+        hiddenColumns: true,
         trend: false,
         sort: true,
         tableSort: true,
       },
-    },
-    row: {
-      showTooltip: false,
-    },
-    data: {
-      showTooltip: false,
-    },
-    corner: {
-      showTooltip: false,
-    },
-    operation: {
-      hiddenColumns: false,
-      trend: false,
-      sort: true,
-      tableSort: true,
     },
     renderTooltip: (spreadsheet: SpreadSheet) => new CustomTooltip(spreadsheet),
   },
