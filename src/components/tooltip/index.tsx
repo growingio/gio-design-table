@@ -24,7 +24,7 @@ import { TooltipRenderProps } from './interfaces';
 import './index.less';
 import en from '../../locales/en.json';
 
-const MESSAGES: { [key: string]: unknown; } = {
+const MESSAGES: { [key: string]: any; } = {
   'en-US': en,
   en,
   'zh-CN': {},

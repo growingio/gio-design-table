@@ -1,21 +1,19 @@
 import React from 'react';
 import {
-  SpreadSheet,
-  getSafetyDataConfig
+  SpreadSheet
 } from '@antv/s2';
 import { usePrefixCls } from '@gio-design/utils'
 import { Loading } from '@gio-design/components';
 import { SheetProps } from '../../../interfaces';
 import { useSpreadSheet } from '../../../hooks';
-import './index.less';
 import { getSheetComponentOptions } from '../../../utils';
 import { Header } from '../../header'
+import './index.less';
 
 export const BaseSheet = React.forwardRef(
   (props: SheetProps, ref: React.ForwardedRef<SpreadSheet | undefined>) => {
-    const { dataConfig, options = {}, type: sheetType = 'pivot', prefixCls: customizePrefixCls, header = { legendConfig: { open: true } } } = props;
+    const { options = {}, type: sheetType = 'pivot', prefixCls: customizePrefixCls, header = { legendConfig: { open: true } } } = props;
     const prefixCls = usePrefixCls('d-table', customizePrefixCls);
-    const dataCfg = getSafetyDataConfig(dataConfig);
     const s2Options = getSheetComponentOptions(options)
     const { s2Ref, loading, containerRef, wrapRef } = useSpreadSheet(props, {
       sheetType,
@@ -37,8 +35,6 @@ export const BaseSheet = React.forwardRef(
                 {...header}
                 sheet={s2Ref.current as SpreadSheet}
                 width={containerRef?.current?.getBoundingClientRect()?.width || s2Options.width}
-                dataCfg={getSafetyDataConfig(dataCfg)}
-                options={s2Options}
               />
             )}
             <div ref={containerRef as React.RefObject<HTMLDivElement>} className={`${prefixCls}-container`} />
