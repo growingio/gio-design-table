@@ -3,17 +3,17 @@
 .@{tooltip-prefix-cls} {
   &-container {
     position: fixed;
-    overflow: hidden;
-    background-color: @gray-0;
-    min-width: 120px;
-    max-width: 640px;
     z-index: 1024;
     display: inline-block;
+    min-width: 120px;
+    max-width: 640px;
+    overflow: hidden;
     font-size: 12px;
+    background-color: @gray-0;
 
     &-show {
-      opacity: 1;
       visibility: visible;
+      opacity: 1;
       pointer-events: all;
     }
     .border(4);
@@ -21,8 +21,8 @@
     .font();
 
     &-hide {
-      opacity: 0;
       visibility: hidden;
+      opacity: 0;
       pointer-events: none;
 
       * {
@@ -30,39 +30,40 @@
       }
     }
   }
+
   &-tips,
   &-name {
     padding: 12px;
+    color: rgb(0 0 0 / 85%);
     line-height: 16px;
     overflow-wrap: break-word;
-    color: rgba(0, 0, 0, 0.85);
   }
 
   &-tips {
     padding: 4px 12px;
-    color: rgba(0, 0, 0, 0.45);
+    color: rgb(0 0 0 / 45%);
   }
 
   &-infos {
+    display: box;
     padding: 4px 12px;
-    line-height: 20px;
-    color: rgba(0, 0, 0, 0.45);
     overflow: hidden;
+    color: rgb(0 0 0 / 45%);
+    line-height: 20px;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
     overflow-wrap: break-word;
-    background: rgba(249, 249, 249, 0.96);
-    border-radius: 0 0 2px 2px;
+    background: rgb(249 249 249 / 96%);
     background-color: #f9f9f9;
+    border-radius: 0 0 2px 2px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   &-summary {
-    line-height: 20px;
-    color: rgba(0, 0, 0, 0.65);
-    overflow: hidden;
     padding: 12px;
+    overflow: hidden;
+    color: rgb(0 0 0 / 65%);
+    line-height: 20px;
 
     &-item {
       display: flex;
@@ -74,17 +75,17 @@
 
     &-val {
       flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
       text-align: right;
       text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
     }
   }
 
   &-interpretation {
-    color: rgba(0, 0, 0, 0.65);
-    overflow: hidden;
     padding: 12px;
+    overflow: hidden;
+    color: rgb(0 0 0 / 65%);
 
     .@{tooltip-prefix-cls}-interpretation-head {
       margin-bottom: 12px;
@@ -101,8 +102,8 @@
   }
 
   &-head-info-list {
-    color: #a2a2a2;
     padding: 12px 12px 4px;
+    color: #a2a2a2;
     line-height: 20px;
   }
 
@@ -116,7 +117,7 @@
   }
 
   &-highlight {
-    color: rgba(0, 0, 0, 0.85);
+    color: rgb(0 0 0 / 85%);
   }
 
   &-divider {
@@ -127,12 +128,12 @@
     padding: 2px 12px 8px;
 
     .@{tooltip-prefix-cls}-detail-item {
-      color: rgba(0, 0, 0, 0.65);
-      overflow: hidden;
-      margin: 4px 0;
       display: flex;
-      justify-content: space-around;
       align-items: center;
+      justify-content: space-around;
+      margin: 4px 0;
+      overflow: hidden;
+      color: rgb(0 0 0 / 65%);
 
       &-key {
         margin-right: 20px;
@@ -140,10 +141,10 @@
 
       &-val {
         flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
         text-align: right;
         text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
       }
     }
   }
