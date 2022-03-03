@@ -14,7 +14,8 @@ module.exports = {
     '^.+\\.ts(x)?$': 'ts-jest',
   },
   roots: ['./src'],
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
+  // testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
+  testMatch: ['**/?(*.)+(spec|test).[jt]s?(x)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   // explicitly include any node libs using ESM modules
   // "node_modules/?!(<ESM module here>|<another here>|<etc...>)"
