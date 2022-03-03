@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React from 'react';
 import cx from 'classnames';
 import { TooltipContentType } from '@antv/s2';
@@ -8,7 +9,7 @@ interface Props {
   style?: React.CSSProperties;
   className?: string;
 }
-export const ReactElement: React.FC<Props> = (props: Props) => {
+export function ReactElement(props: Props) {
   const { style = {}, className, content } = props;
   const prefixCls = usePrefixCls('react-element');
   let htmlNode: string;

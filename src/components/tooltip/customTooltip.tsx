@@ -1,9 +1,5 @@
-import { BaseTooltip, SpreadSheet } from '@antv/s2';
+import { BaseTooltip, SpreadSheet, setContainerStyle, TooltipShowOptions } from '@antv/s2';
 import ReactDOM from 'react-dom';
-import {
-  setContainerStyle,
-  TooltipShowOptions,
-} from '@antv/s2'
 import { TooltipComponent } from '.';
 import { TooltipRenderProps } from './interfaces';
 import './index.less'
@@ -13,10 +9,12 @@ import './index.less'
 // );
 export class CustomTooltip extends BaseTooltip {
   public customizePrefixCls: string;
+
   constructor(spreadsheet: SpreadSheet, customizePrefixCls?: string) {
     super(spreadsheet);
     this.customizePrefixCls = customizePrefixCls || 'gio-d-table-tooltip';
   }
+
   public show<T = Element | string>(showOptions: TooltipShowOptions<T>) {
     super.show(showOptions);
     const container = this.getContainer();
@@ -32,6 +30,7 @@ export class CustomTooltip extends BaseTooltip {
       className: `${this.customizePrefixCls}-container-hide`,
     });
   }
+
   renderContent() {
     // 配置级 s2.options.tooltip.content = ''
     const { content: contentFromOptions } = this.spreadsheet.options.tooltip || {};
@@ -56,6 +55,7 @@ export class CustomTooltip extends BaseTooltip {
       ReactDOM.unmountComponentAtNode(this.container);
     }
   }
+
   protected getContainer(): HTMLElement {
     if (!this.container) {
       const container = document.createElement('div');

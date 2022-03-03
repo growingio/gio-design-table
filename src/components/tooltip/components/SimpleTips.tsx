@@ -1,8 +1,9 @@
 import React from 'react';
 import { TooltipNameTipsOptions } from '@antv/s2';
-import { TOOLTIP_PREFIX_CLS } from '../../../common'
 import { usePrefixCls } from '@gio-design/utils';
-export const SimpleTips = (props: TooltipNameTipsOptions) => {
+import { TOOLTIP_PREFIX_CLS } from '../../../common'
+
+export function SimpleTips(props: TooltipNameTipsOptions) {
   const { tips = '', name = '' } = props;
   const prefixCls = usePrefixCls(TOOLTIP_PREFIX_CLS)
   return (
@@ -11,4 +12,4 @@ export const SimpleTips = (props: TooltipNameTipsOptions) => {
       {tips && <div className={`${prefixCls}-tips`}>{tips}</div>}
     </>
   );
-};
+}

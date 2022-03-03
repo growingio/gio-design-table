@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useLayoutEffect, useEffect, useRef, useMemo, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useEffect, useState } from 'react';
 import { debounce, round } from 'lodash';
 import type { SpreadSheet } from '@antv/s2';
 import { Adaptive } from '../interfaces';
@@ -20,13 +20,13 @@ const readResizeObserverEntry = (entry: ResizeObserverEntry) => {
     const borderBoxSize = Array.isArray(entry.borderBoxSize) ? entry.borderBoxSize[0] : entry.borderBoxSize;
     const { inlineSize: width, blockSize: height } = borderBoxSize;
     return { width, height };
-  } else {
-    // For older browsers & mobile devices that don't support the newer `borderBoxSize`
-    // Note that we could use entry.contentRect here, which has better performance,
-    // but since it does not include the padding & borders we use getBoundingClientRect() instead.
-    const { width, height } = entry.target.getBoundingClientRect();
-    return { width, height };
   }
+  // For older browsers & mobile devices that don't support the newer `borderBoxSize`
+  // Note that we could use entry.contentRect here, which has better performance,
+  // but since it does not include the padding & borders we use getBoundingClientRect() instead.
+  const { width, height } = entry.target.getBoundingClientRect();
+  return { width, height };
+
 };
 const parseAdaptive = (defaultContainer?: HTMLElement, adaptive?: Adaptive) => {
   let container = defaultContainer;
@@ -100,7 +100,7 @@ export const useResize = (props: UseResizeEffectProps) => {
     });
 
     return () => {
-      //container可能为外层容器 这里仅unobserve
+      // container可能为外层容器 这里仅unobserve
       resizeObserver.unobserve(wrapper);
     };
   }, [adaptiveState, adaptive, render])

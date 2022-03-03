@@ -1,4 +1,5 @@
 import { Palette } from '@antv/s2'
+
 export const paletteDefault: Palette = {
   // --------- basic colors -----------
   basicColors: [

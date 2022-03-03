@@ -1,19 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { CSSProperties, FC, ReactNode, useCallback } from 'react';
+import React, { CSSProperties, ReactNode, useCallback } from 'react';
 import cx from 'classnames';
-import { S2DataConfig, S2Options, SpreadSheet } from '@antv/s2';
+import { SpreadSheet } from '@antv/s2';
 
 import './index.less';
 import { usePrefixCls } from '@gio-design/utils';
 import { PaletteLegend, PaletteLegendProps } from '../legend';
 import { CELL_COLOR_MAP } from '../../common';
 import DataTableHeader from './Header'
+
 export interface HeaderConfigProps {
   legendConfig?: PaletteLegendProps & { open: boolean }
 }
 export interface HeaderProps extends HeaderConfigProps {
-  dataCfg?: S2DataConfig;
-  options?: S2Options;
+  // dataCfg?: S2DataConfig;
+  // options?: S2Options;
   sheet: SpreadSheet;
   className?: string;
   title?: string | React.ReactNode;
@@ -23,18 +24,16 @@ export interface HeaderProps extends HeaderConfigProps {
   width?: CSSProperties['width']
 }
 
-export const Header: FC<HeaderProps> = ({
+export function Header({
   className,
   title,
   width,
   description,
   sheet,
   extra,
-  dataCfg,
-  options,
   legendConfig,
   ...restProps
-}) => {
+}: HeaderProps) {
 
   const headerPrefixCls = usePrefixCls('d-table-header');
   /**
@@ -56,14 +55,12 @@ export const Header: FC<HeaderProps> = ({
     )
   }, [legendConfig])
 
-  const getExtraComponents = () => {
-    return (
-      <>
-        {extra}
-        {renderLegend()}
-      </>
-    );
-  };
+  const getExtraComponents = () => (
+    <>
+      {extra}
+      {renderLegend()}
+    </>
+  );
 
   return (
     <DataTableHeader
@@ -76,5 +73,5 @@ export const Header: FC<HeaderProps> = ({
       {description}
     </DataTableHeader>
   );
-};
+}
 

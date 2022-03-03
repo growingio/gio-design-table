@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React from 'react';
 import classNames from 'classnames';
 import { usePrefixCls } from '@gio-design/utils';
@@ -22,7 +23,7 @@ export interface HtmlIconProps {
   style?: React.CSSProperties;
 }
 
-export const HtmlIcon: React.FC<HtmlIconProps> = (props: HtmlIconProps) => {
+export function HtmlIcon(props: HtmlIconProps) {
   const { style = {}, width, height, className, name } = props;
   const prefixCls = usePrefixCls('html-icon');
   const svgIcon = () => getIcon(name);
