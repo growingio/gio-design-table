@@ -1,7 +1,7 @@
 import { DataCell, TextTheme } from '@antv/s2'
-import { clamp, isEmpty, isNil } from 'lodash';
+import { isEmpty, isNil } from 'lodash';
 import { parseNumberWithPrecision } from '../../../utils';
-
+import { computeArrayPosition } from './util'
 import { CELL_COLOR_MAP } from '../../../common'
 /**
  * dataCell背景标注的颜色 [backgroudColor,textColor]
@@ -25,44 +25,7 @@ const CellColorMap = CELL_COLOR_MAP;
 */
 export class CustomDataCell extends DataCell {
 
-  /**
-   * 计算背景标注的颜色
-   * ______________min_________x_____0___________________________max
-   * |<------------r---------------->|
-   *
-   * 0_____________x_______________（max-min）
-   * |<-----------r----------->|
-   * 
-   * (max-min)__________x__________________0
-   * |<-----------------r----------------->|
-   *
-   * @param minValue 
-   * @param maxValue 
-   * @returns 
-   */
-  private getBgColorScale(_minValue = 0, _maxValue = 0) {
-    const minValue = parseNumberWithPrecision(_minValue);
-    const maxValue = parseNumberWithPrecision(_maxValue);
 
-    let realMin = 0;
-    let distance = 1;
-    const isPositive = minValue >= 0;
-    const isNagative = maxValue <= 0;
-    if (isPositive || isNagative) {
-
-      realMin = minValue;
-      distance = maxValue - minValue || 1;
-
-    } else {
-      // 正负数混合 区值区间为 最大值最小值
-      distance = Math.max(Math.abs(maxValue), Math.abs(minValue));
-      realMin = 0;
-    }
-    return (current: number) =>
-      // max percentage shouldn't be greater than 100%
-      // min percentage shouldn't be less than 0%
-      clamp((current - realMin) / distance, -1, 1);
-  }
 
   protected getTextStyle(): TextTheme {
     const { isTotals } = this.meta;
@@ -98,16 +61,9 @@ export class CustomDataCell extends DataCell {
     return { ...textStyle, fill };
   }
 
+
   private computeColorMapPosition(fieldValue: number, minValue?: number, maxValue?: number) {
-    const scale = this.getBgColorScale(minValue, maxValue);
-    // -1<=current<=1
-    const current = scale(fieldValue); // 当前数据点
-    // 计算当前数据点 在CellColorMap 数组中的位置
-    // 1. current: (-1~1)-->(0~2)
-    const pos = current + 1;
-    // 2. CellColorMap.length 0~12  
-    const index = Math.ceil(parseNumberWithPrecision(pos / CellColorMap.length) / parseNumberWithPrecision(2 / CellColorMap.length) * 10)
-    return index;
+    return computeArrayPosition(CellColorMap.length, fieldValue, minValue, maxValue);
   }
 
   getBackgroundColor() {
@@ -134,6 +90,12 @@ export class CustomDataCell extends DataCell {
         const { minValue, maxValue } = attrs.isCompare
           ? attrs
           : this.spreadsheet.dataSet.getValueRangeByField(this.meta.valueField);
+        // 'KnGnL3QR'
+        // if (this.meta.valueField == 'KnGnL3QR') {
+        //   console.log('........', this.meta);
+        //   console.log(minValue, maxValue, this.meta.fieldValue)
+        // }
+
         const fieldValue = parseNumberWithPrecision(
           this.meta.fieldValue as number,
         );

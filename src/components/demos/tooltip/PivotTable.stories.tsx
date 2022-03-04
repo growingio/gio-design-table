@@ -1,13 +1,13 @@
 import { Data, SortParams } from '@antv/s2';
 import { ComponentStory } from '@storybook/react';
 import { ChangeEventHandler, useRef, useState } from 'react';
-import { Adaptive, SheetProps } from '../..';
-import { DataTable } from '../sheet';
+import { Adaptive, SheetProps } from '../../..';
+import { DataTable } from '../../sheet';
 // import Docs from './Table.mdx';
-import dataCfg from './pivot-data'
+import dataCfg from '../pivot-data'
 
 export default {
-  title: 'DataTable/透视表 Pivot Table',
+  title: 'Tooltip',
   argTypes: {
     backgroundColor: { control: 'color' },
   },

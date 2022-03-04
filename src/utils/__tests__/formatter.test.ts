@@ -7,7 +7,8 @@ describe('formatter tests', () => {
     const n2 = parseNumberWithPrecision(6 * 0.1);
     expect(n2).toEqual(0.6000000000000001)
     expect(n2).not.toEqual(n1);
-    expect(parseNumberWithPrecision(-6 * 0.1)).toBe(-0.6000000000000001)
+    expect(parseNumberWithPrecision(-6 * 0.1)).toBe(-0.6000000000000001);
+    expect(parseNumberWithPrecision(0)).toStrictEqual(0);
   });
 
 })

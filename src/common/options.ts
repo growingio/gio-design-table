@@ -8,7 +8,7 @@ export const SHEET_COMPONENT_DEFAULT_OPTIONS: Readonly<Partial<S2Options>> = {
     col: {
       showTooltip: true,
       operation: {
-        hiddenColumns: true,
+        hiddenColumns: false,
         trend: false,
         sort: true,
         tableSort: true,
