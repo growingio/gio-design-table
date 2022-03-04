@@ -9,6 +9,8 @@ import {
   TooltipInterpretationOptions,
   getTooltipDefaultOptions,
 } from '@antv/s2';
+import { DesignContext } from '@gio-design/utils';
+import { IntlProvider } from 'react-intl';
 import { TooltipDetail } from './components/TooltipDetail';
 import { Divider } from './components/TooltipDivider';
 import { TooltipHead } from './components/TooltipHead';
@@ -20,47 +22,40 @@ import { TooltipSummary } from './components/TooltipSummary';
 import { TooltipRenderProps } from './interfaces';
 
 import './index.less';
-import { DesignContext } from '@gio-design/utils';
-import { IntlProvider } from 'react-intl';
 import en from '../../locales/en.json';
+
 const MESSAGES: { [key: string]: any; } = {
   'en-US': en,
-  en: en,
+  en,
   'zh-CN': {},
   zh: {},
 };
-export const TooltipComponent: React.FC<TooltipRenderProps> = (props) => {
+export function TooltipComponent(props: TooltipRenderProps) {
   const { data, options, content, cell } = props;
   const context = useContext(DesignContext);
   const localeCode = context?.locale?.code || 'zh-CN';
-  const renderDivider = () => {
-    return <Divider />;
-  };
+  const renderDivider = () => <Divider />;
 
   const renderOperation = (
     operator?: TooltipOperatorOptions,
-    onlyMenu: boolean = true,
-  ) => {
-    return (
-      operator ? (
-        <TooltipOperator
-          onClick={operator.onClick}
-          menus={operator.menus}
-          onlyMenu={onlyMenu}
-          cell={cell}
-        />
-      ) : null
-    );
-  };
+    onlyMenu = true,
+  ) => (
+    operator ? (
+      <TooltipOperator
+        onClick={operator.onClick}
+        menus={operator.menus}
+        onlyMenu={onlyMenu}
+        cell={cell}
+      />
+    ) : null
+  );
 
   const renderNameTips = (nameTip: TooltipNameTipsOptions) => {
     const { name, tips } = nameTip || {};
     return <SimpleTips name={name} tips={tips} />;
   };
 
-  const renderSummary = (summaries?: TooltipSummaryOptions[]) => {
-    return !isEmpty(summaries) && <TooltipSummary summaries={summaries || []} />;
-  };
+  const renderSummary = (summaries?: TooltipSummaryOptions[]) => !isEmpty(summaries) && <TooltipSummary summaries={summaries || []} />;
 
   const renderHeadInfo = (headInfo?: TooltipHeadInfoType) => {
     const { cols, rows } = headInfo || {};
@@ -75,19 +70,13 @@ export const TooltipComponent: React.FC<TooltipRenderProps> = (props) => {
     );
   };
 
-  const renderDetail = (details?: ListItem[]) => {
-    return details && !isEmpty(details) && <TooltipDetail list={details} />;
-  };
+  const renderDetail = (details?: ListItem[]) => details && !isEmpty(details) && <TooltipDetail list={details} />;
 
-  const renderInfos = (infos?: string) => {
-    return infos && <TooltipInfos infos={infos} />;
-  };
+  const renderInfos = (infos?: string) => infos && <TooltipInfos infos={infos} />;
 
   const renderInterpretation = (
     interpretation?: TooltipInterpretationOptions,
-  ) => {
-    return interpretation && <Interpretation {...interpretation} />;
-  };
+  ) => interpretation && <Interpretation {...interpretation} />;
 
   const renderContent = () => {
     const option = getTooltipDefaultOptions(options);
@@ -124,4 +113,4 @@ export const TooltipComponent: React.FC<TooltipRenderProps> = (props) => {
     {renderContent()}
   </IntlProvider>)
 
-};
+}

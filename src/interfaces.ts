@@ -6,14 +6,11 @@ import {
   LayoutCol,
   LayoutRow,
   S2Constructor,
-  Node,
   SpreadSheet,
   ThemeCfg,
   ViewMeta,
   LayoutResult,
-  SortParams,
-  Palette,
-  S2Theme
+  SortParams
 } from '@antv/s2';
 import { HeaderConfigProps } from './components/header';
 /**

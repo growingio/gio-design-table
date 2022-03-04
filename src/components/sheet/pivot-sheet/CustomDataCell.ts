@@ -40,9 +40,9 @@ export class CustomDataCell extends DataCell {
    * @param maxValue 
    * @returns 
    */
-  private getBgColorScale(minValue = 0, maxValue = 0) {
-    minValue = parseNumberWithPrecision(minValue);
-    maxValue = parseNumberWithPrecision(maxValue);
+  private getBgColorScale(_minValue = 0, _maxValue = 0) {
+    const minValue = parseNumberWithPrecision(_minValue);
+    const maxValue = parseNumberWithPrecision(_maxValue);
 
     let realMin = 0;
     let distance = 1;
@@ -54,7 +54,7 @@ export class CustomDataCell extends DataCell {
       distance = maxValue - minValue || 1;
 
     } else {
-      //正负数混合 区值区间为 最大值最小值
+      // 正负数混合 区值区间为 最大值最小值
       distance = Math.max(Math.abs(maxValue), Math.abs(minValue));
       realMin = 0;
     }
@@ -63,15 +63,16 @@ export class CustomDataCell extends DataCell {
       // min percentage shouldn't be less than 0%
       clamp((current - realMin) / distance, -1, 1);
   }
+
   protected getTextStyle(): TextTheme {
     const { isTotals } = this.meta;
     const textStyle = isTotals
       ? this.theme.dataCell?.bolderText as TextTheme
       : this.theme.dataCell?.text as TextTheme;
 
-    let fill = textStyle.fill;
+    let { fill } = textStyle;
     // 如果设置了background condition 则需要重新设置文本色，如果同时设置了文本标注 按照文本标注的颜色填充
-    //if backgroundCondition reset fill
+    // if backgroundCondition reset fill
     const bgCondition = this.conditions?.background ? this.findFieldCondition(this.conditions?.background) : undefined;
     if (bgCondition && bgCondition.mapping) {
       const attrs = this.mappingValue(bgCondition);
@@ -96,17 +97,19 @@ export class CustomDataCell extends DataCell {
     }
     return { ...textStyle, fill };
   }
+
   private computeColorMapPosition(fieldValue: number, minValue?: number, maxValue?: number) {
     const scale = this.getBgColorScale(minValue, maxValue);
-    //-1<=current<=1
+    // -1<=current<=1
     const current = scale(fieldValue); // 当前数据点
-    //计算当前数据点 在CellColorMap 数组中的位置
-    //1. current: (-1~1)-->(0~2)
+    // 计算当前数据点 在CellColorMap 数组中的位置
+    // 1. current: (-1~1)-->(0~2)
     const pos = current + 1;
-    //2. CellColorMap.length 0~12  
+    // 2. CellColorMap.length 0~12  
     const index = Math.ceil(parseNumberWithPrecision(pos / CellColorMap.length) / parseNumberWithPrecision(2 / CellColorMap.length) * 10)
     return index;
   }
+
   getBackgroundColor() {
     const crossBackgroundColor = this.getStyle()?.cell?.crossBackgroundColor as string;
 

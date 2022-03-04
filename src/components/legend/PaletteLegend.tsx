@@ -1,12 +1,13 @@
 import { usePrefixCls } from '@gio-design/utils';
 import './index.less'
+
 export type PaletteColor = React.CSSProperties['backgroundColor']
 export interface PaletteLegendProps {
   colors?: PaletteColor[];
   left?: string;
   right?: string
 }
-export const PaletteLegend = (props: PaletteLegendProps) => {
+export function PaletteLegend(props: PaletteLegendProps) {
   const { colors = [], left = '-', right = '+' } = props;
   const clsPrefix = usePrefixCls('d-table-legend')
   return (

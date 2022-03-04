@@ -7,7 +7,7 @@ export interface IconProps {
   icon?: Element | string;
   [key: string]: unknown;
 };
-export const Icon = (props: IconProps) => {
+export function Icon(props: IconProps) {
   const { icon, ...attrs } = props;
 
   if (!icon) {
@@ -22,4 +22,4 @@ export const Icon = (props: IconProps) => {
   return (
     <ReactElement content={icon} {...TOOLTIP_DEFAULT_ICON_PROPS} {...attrs} />
   );
-};
+}

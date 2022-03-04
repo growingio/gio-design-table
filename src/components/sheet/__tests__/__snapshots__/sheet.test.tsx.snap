@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spread Sheet Tests Mount Sheet tests should display scroll bar if s2Options.width more than browser window width 1`] = `
+<div>
+  <div>
+    <div
+      class="gio-loading-wrapper-loading"
+    >
+      <div
+        class="gio-loading-container gio-loading-container-blur-white"
+      >
+        <div
+          class="gio-d-table-wrapper"
+        >
+          <div
+            class="gio-d-table-header gio-d-table-header"
+            style="width: 1124px;"
+          >
+            <div
+              class="gio-d-table-header-heading"
+            >
+              <div
+                class="gio-d-table-header-heading-left"
+              />
+              <span
+                class="gio-d-table-header-heading-extra"
+              />
+            </div>
+          </div>
+          <div
+            class="gio-d-table-container"
+          >
+            <canvas
+              height="600"
+              style="width: 1124px; height: 600px; display: block;"
+              width="1124"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+     
+  </div>
+</div>
+`;

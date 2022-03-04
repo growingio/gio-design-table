@@ -1,10 +1,11 @@
 import { Data, SortParams } from '@antv/s2';
-import { ComponentStory, Story } from '@storybook/react';
+import { ComponentStory } from '@storybook/react';
 import { ChangeEventHandler, useRef, useState } from 'react';
 import { Adaptive, SheetProps } from '../..';
 import { DataTable } from '../sheet';
 // import Docs from './Table.mdx';
 import dataCfg from './pivot-data'
+
 export default {
   title: 'DataTable/透视表 Pivot Table',
   argTypes: {
@@ -20,7 +21,7 @@ export default {
 
 const Template: ComponentStory<typeof DataTable> = (args) => <div
   className='table-demo-box'>
-  <DataTable {...args}></DataTable>
+  <DataTable {...args} />
 </div>
 export const Default = Template.bind({});
 
@@ -90,11 +91,11 @@ export const Tree: ComponentStory<typeof DataTable> = () => {
     }
   }
   return (<div className='table-demo-box'>
-    <DataTable {...props}></DataTable>
+    <DataTable {...props} />
   </div>)
 }
 
-export const CustomTheme = () => {
+export function CustomTheme() {
   const customTheme = {
     splitLine: {
       horizontalBorderColor: '#ADB2C2',
@@ -132,10 +133,10 @@ export const CustomTheme = () => {
     themeConfig: { theme: customTheme }
   }
   return (<div className='table-demo-box'>
-    <DataTable {...props}></DataTable>
+    <DataTable {...props} />
   </div>)
 }
-export const AdaptiveContainer = () => {
+export function AdaptiveContainer() {
   const [adaptive, setAdaptive] = useState<Adaptive>(false)
   const wrapRef = useRef<HTMLDivElement>(null);
   const props: SheetProps = {
@@ -167,7 +168,7 @@ export const AdaptiveContainer = () => {
     <hr />
     <div style={{ border: '1px solid #adadad', padding: '10px' }}>
       <div ref={wrapRef}>
-        <DataTable {...props}></DataTable>
+        <DataTable {...props} />
       </div>
     </div></div>)
 }
@@ -175,7 +176,7 @@ export const AdaptiveContainer = () => {
  * 字段标注-背景标注
  * @returns 
  */
-export const BackgroundAnnotation = () => {
+export function BackgroundAnnotation() {
   const props: SheetProps = {
     type: 'pivot',
     options: {
@@ -186,7 +187,7 @@ export const BackgroundAnnotation = () => {
         background: [
           {
             field: 'number',
-            mapping(fieldValue, data) {
+            mapping() {
               return {
                 // fill 是背景字段下唯一必须的字段，用于指定文本颜色
                 fill: '',
@@ -210,6 +211,6 @@ export const BackgroundAnnotation = () => {
     onSortChange: (params: SortParams) => { console.log('onSortChange', params) }
   }
   return (<div className='table-demo-box'>
-    <DataTable {...props}></DataTable>
+    <DataTable {...props} />
   </div>)
 }

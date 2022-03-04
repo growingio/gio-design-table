@@ -1,17 +1,16 @@
-// import { Menu, Dropdown, MenuProps } from 'antd';
 import { isEmpty, map } from 'lodash';
-import React from 'react';
 import {
   S2CellType,
   TooltipOperatorMenu,
   TooltipOperatorOptions,
 } from '@antv/s2';
-import { Icon } from '../TooltipIcon';
-import './index.less';
-import { TOOLTIP_PREFIX_CLS } from '../../../../common'
+
 import { usePrefixCls } from '@gio-design/utils';
 import { Dropdown, List } from '@gio-design/components'
 import { CascaderItem } from '@gio-design/components/es/cascader';
+import { TOOLTIP_PREFIX_CLS } from '../../../../common'
+import { Icon } from '../TooltipIcon';
+import './index.less';
 
 const { Item } = List;
 interface TooltipOperatorProps extends TooltipOperatorOptions {
@@ -27,15 +26,15 @@ interface TooltipOperatorProps extends TooltipOperatorOptions {
  *    delay 300ms show
  */
 
-export const TooltipOperator = (props: TooltipOperatorProps) => {
+export function TooltipOperator(props: TooltipOperatorProps) {
   const { menus, onlyMenu, onClick: onMenuClick, cell } = props;
   const tooltipPrefixCls = usePrefixCls(TOOLTIP_PREFIX_CLS);
 
   const renderTitle = (menu: TooltipOperatorMenu) => {
-    const icon = menu.icon && <Icon
+    const icon = menu.icon && (<Icon
       icon={menu.icon}
       className={`${tooltipPrefixCls}-operator-icon`}
-    />;
+    />);
     return (
       <Item value={menu.key} prefix={icon}
         onClick={(v, e) => {
@@ -89,7 +88,7 @@ export const TooltipOperator = (props: TooltipOperatorProps) => {
           {map(menus, (operatorMenu: TooltipOperatorMenu) => renderMenu(operatorMenu))}
         </List>
       ) : (
-        <></>
+        null
       );
 
       return (
@@ -106,4 +105,4 @@ export const TooltipOperator = (props: TooltipOperatorProps) => {
   }
   return <div className={`${tooltipPrefixCls}-operator`}>{renderMenus()}</div>
 
-};
+}

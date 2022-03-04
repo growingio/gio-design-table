@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SpreadSheet, S2Event } from '@antv/s2';
 
-export const useLoading = (s2?: SpreadSheet, loadingFromProps: boolean = false) => {
+export const useLoading = (s2?: SpreadSheet, loadingFromProps = false) => {
   const [loading, setLoading] = useState<boolean>(loadingFromProps);
 
   useEffect(() => {

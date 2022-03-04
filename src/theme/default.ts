@@ -1,6 +1,7 @@
-import { isMobile, isWindows } from '@antv/s2';
+import { isWindows } from '@antv/s2';
 import { ThemeConfig } from '..';
 import { FONT_FAMILY, PALETTE_MAP, MINI_BAR_CHART_HEIGHT } from './constant';
+
 const { basicColors, semanticColors } = PALETTE_MAP.default;
 export const themeDefault: ThemeConfig = {
   palette: PALETTE_MAP.default,

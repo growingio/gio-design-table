@@ -6,11 +6,12 @@ import {
   SpreadSheet,
   TableSheet,
 } from '@antv/s2';
-import React, { MutableRefObject, useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import type { BaseSheetProps, SheetType } from '../interfaces';
 import { themeDefault } from '../theme';
 import { getSheetComponentOptions } from '../utils';
 import { useEvents } from './useEvents';
+import { useForceUpdate } from './useForceUpdate';
 import { useLoading } from './useLoading';
 import { usePagination } from './usePagination';
 import { usePrevious } from './usePrevious';
@@ -37,6 +38,8 @@ export const useSpreadSheet = (
   const prevDataCfg = usePrevious(dataConfig);
   const prevOptions = usePrevious(options);
   const prevThemeCfg = usePrevious(themeConfig);
+  const forceUpdate = useForceUpdate();
+
   useEvents(props, s2Ref.current);
   const renderSpreadSheet = useCallback(
     (container: HTMLDivElement) => {
@@ -59,7 +62,8 @@ export const useSpreadSheet = (
     s2Ref.current.setThemeCfg(themeConfig);
     s2Ref.current.render();
     setLoading(false);
-  }, [props, renderSpreadSheet, setLoading, config]);
+    forceUpdate();
+  }, [props, renderSpreadSheet, setLoading, config, forceUpdate]);
 
   // init
   useEffect(() => {
@@ -69,7 +73,7 @@ export const useSpreadSheet = (
     };
   }, []);
 
-  //rerender when dataCfg, options or theme changed
+  // rerender when dataCfg, options or theme changed
   useEffect(() => {
     let reloadData = false;
     let reBuildDataSet = false;
@@ -97,9 +101,9 @@ export const useSpreadSheet = (
     // s2Ref: s2Ref,
     container: containerRef.current as HTMLElement,
     s2: s2Ref.current as SpreadSheet,
-    containerRef: containerRef,
+    containerRef,
     wrapperRef: wrapRef,
-    adaptive: adaptive,
+    adaptive,
   });
 
   return {

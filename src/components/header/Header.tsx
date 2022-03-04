@@ -47,7 +47,7 @@ const renderChildren = (prefixCls: string, children: React.ReactNode) => (
   <div className={`${prefixCls}-content`}>{children}</div>
 );
 
-const DataTableHeader: React.FC<DataTableHeaderProps> = props => {
+function DataTableHeader(props: React.PropsWithChildren<DataTableHeaderProps>) {
   const {
     prefixCls: customizePrefixCls,
     style,

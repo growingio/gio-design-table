@@ -3,8 +3,8 @@ import { size, reduce } from 'lodash';
 import { SummaryProps } from '@antv/s2';
 import cls from 'classnames';
 import { usePrefixCls } from '@gio-design/utils';
-import { TOOLTIP_PREFIX_CLS } from '../../../common'
 import { useIntl } from 'react-intl'
+import { TOOLTIP_PREFIX_CLS } from '../../../common'
 
 export const TooltipSummary: React.FC<SummaryProps> = React.memo((props) => {
   const { summaries = [] } = props;
@@ -26,8 +26,7 @@ export const TooltipSummary: React.FC<SummaryProps> = React.memo((props) => {
     );
   };
 
-  const renderSummary = () => {
-    return summaries?.map((item) => {
+  const renderSummary = () => summaries?.map((item) => {
       const { name = '', value } = item || {};
       if (!name && !value) {
         return null;
@@ -52,7 +51,6 @@ export const TooltipSummary: React.FC<SummaryProps> = React.memo((props) => {
         </div>
       );
     });
-  };
 
   return (
     <div className={`${prefixCls}-summary`}>

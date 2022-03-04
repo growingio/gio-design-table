@@ -64,6 +64,14 @@ module.exports = {
         assert: 'either',
       },
     ],
+    'import/prefer-default-export': ['off'],
+    'consistent-return': ['off', { treatUndefinedAsUnspecified: true }],
+    'react/react-in-jsx-scope': 'off',
+    'prefer-destructuring': 'off',
+    'react/no-array-index-key': 'off',
+    'no-plusplus': 'off',
+    'class-methods-use-this': 'off',
+    'react/function-component-definition': ['off'],
   },
   overrides: [
     {

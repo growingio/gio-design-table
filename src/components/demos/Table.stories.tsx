@@ -1,10 +1,10 @@
-import { ComponentStory, Story } from '@storybook/react';
-import { SheetProps } from '../..';
-import { DataTable } from '../sheet';
-import Docs from './Table.mdx';
-import { prod } from './simple-data'
+import { ComponentStory } from '@storybook/react';
 import { useMemo, useState } from 'react';
 import { useEffect } from '@storybook/addons';
+import { SheetProps } from '../..';
+import { DataTable } from '../sheet';
+import { prod } from './simple-data'
+
 export default {
   title: 'DataTable/明细表 Table',
   argTypes: {
@@ -13,14 +13,14 @@ export default {
   component: DataTable,
   parameters: {
     docs: {
-      page: Docs,
+      // page: Docs,
     },
   },
 };
 
 const Template: ComponentStory<typeof DataTable> = (args) => <div
   className='table-demo-box'>
-  <DataTable {...args}></DataTable>
+  <DataTable {...args} />
 </div>
 export const Default = Template.bind({});
 const options = {
@@ -91,9 +91,7 @@ Empty.args = {
 export const Sort: ComponentStory<typeof DataTable> = () => {
   const [data, setData] = useState<any[]>([]);
   const getData = () => new Promise((resolve) => {
-    setTimeout(() => {
-      return resolve(prod as any[])
-    }, 1000)
+    setTimeout(() => resolve(prod as any[]), 1000)
   });
   useEffect(() => {
 
@@ -139,7 +137,7 @@ export const Sort: ComponentStory<typeof DataTable> = () => {
     <DataTable options={{
       width: 600,
       height: 480,
-    }} type="table" dataConfig={dataCfg}></DataTable>
+    }} type="table" dataConfig={dataCfg} />
   </div>
 }
 export const ShowSeriesNumber: ComponentStory<typeof DataTable> = () => {
@@ -169,12 +167,10 @@ export const ShowSeriesNumber: ComponentStory<typeof DataTable> = () => {
     return res;
   }
 
-  const dataSet = useMemo(() => {
-    return generateRawData(
-      { province: 100, city: 10 },
-      { type: 100, sub_type: 10 },
-    )
-  }, []);
+  const dataSet = useMemo(() => generateRawData(
+    { province: 100, city: 10 },
+    { type: 100, sub_type: 10 },
+  ), []);
   const s2DataConfig = {
     fields: {
       columns: ['province', 'city', 'type', 'subType', 'number'],
@@ -188,6 +184,6 @@ export const ShowSeriesNumber: ComponentStory<typeof DataTable> = () => {
   };
   return <div
     className='table-demo-box'>
-    <DataTable options={s2Options} type="table" dataConfig={s2DataConfig}></DataTable>
+    <DataTable options={s2Options} type="table" dataConfig={s2DataConfig} />
   </div>
 }
