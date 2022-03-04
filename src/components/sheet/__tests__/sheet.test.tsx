@@ -1,10 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { render } from '@testing-library/react';
 import { S2Options } from '@antv/s2';
 import * as mockDataConfig from './data/simple-data.json';
 import { DataTable } from '..';
-import { getContainer } from './util';
 
 const s2Options: S2Options = {
   width: 600,
@@ -14,51 +11,28 @@ const s2Options: S2Options = {
 describe('Spread Sheet Tests', () => {
   const hasScrollBar = (container: HTMLElement) => {
     const s2Container = container.querySelector('.gio-d-table-container') as HTMLElement;
-    return (
+    const res = (
       (s2Container.scrollWidth > s2Container.clientWidth ||
         document.body.scrollWidth > window.innerWidth) &&
       window.getComputedStyle(s2Container).overflow !== 'hidden'
     );
+    return res;
   };
 
   describe('Mount Sheet tests', () => {
-    let container: HTMLDivElement;
-    beforeEach(() => {
-      container = getContainer();
+
+    test('should display scroll bar if s2Options.width more than browser window width', () => {
+      const { container } = render(<div><DataTable
+        options={{
+          ...s2Options,
+          width: window.innerWidth + 100,
+        }}
+        adaptive={false}
+        dataConfig={mockDataConfig as any}
+      /></div>);
+      expect(container).toMatchSnapshot();
+      expect(hasScrollBar(container)).toBeFalsy();
     });
 
-    afterEach(() => {
-      container?.remove();
-    });
-    test('t', () => {
-      expect(1).toEqual(1)
-    })
-    // test('should display scroll bar if s2Options.width more than browser window width', () => {
-    //   act(() => {
-    //     ReactDOM.render(
-    //       <DataTable
-    //         options={{
-    //           ...s2Options,
-    //           width: window.innerWidth + 100,
-    //         }}
-    //         dataConfig={mockDataConfig as any}
-    //       />,
-    //       container,
-    //     );
-    //   });
-
-    //   expect(hasScrollBar(container)).toBeTruthy();
-    // });
-
-    // test.skip('should hidden scroll bar if window width more than s2Options.width', () => {
-    //   act(() => {
-    //     ReactDOM.render(
-    //       <DataTable options={s2Options} dataConfig={mockDataConfig as any} />,
-    //       container,
-    //     );
-    //   });
-
-    //   expect(hasScrollBar(container)).toBeFalsy();
-    // });
   });
 });

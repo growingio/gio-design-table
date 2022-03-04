@@ -6,6 +6,8 @@ module.exports = {
   //   userAgent:
   //     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36',
   // },
+  setupFiles: ['./__mocks__/canvas.js', '<rootDir>/__mocks__/matchMedia.js', './__mocks__/setupTests.js'],
+  setupFilesAfterEnv: ['jest-extended'],
   verbose: true,
   // registers babel.config.js with jest
   transform: {
@@ -21,7 +23,6 @@ module.exports = {
   // "node_modules/?!(<ESM module here>|<another here>|<etc...>)"
   // transformIgnorePatterns: ['node_modules/?!(@gio-design\/icon)', '!(@gio-design/icon)'],
   transformIgnorePatterns: ['node_modules/@storybook/(?!(addon-docs)/)'],
-  setupFiles: ['./__mocks__/canvas.js', './__mocks__/setupTests.js'],
 
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
