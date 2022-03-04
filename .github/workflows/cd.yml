@@ -6,8 +6,8 @@ on:
 
 jobs:
   publish-package:
-    use: growingio/.github/workflow-templates/cd-nodejs.yml@master
-    # name: Publish package
+    name: Publish package
+    uses: growingio/.github/workflow-templates/cd-nodejs.yml@master
     # runs-on: ubuntu-latest
     # steps:
     #   - name: Checkout
