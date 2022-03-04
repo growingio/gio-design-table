@@ -1,4 +1,4 @@
-name: Continuous delivery
+name: Continuous Delivery
 on:
   schedule:
     - cron: '* 3 * * 3'
@@ -6,31 +6,7 @@ on:
 
 jobs:
   publish-package:
-    name: Publish package
     uses: growingio/templates/.github/workflows/cd-nodejs.yml@master
-    # runs-on: ubuntu-latest
-    # steps:
-    #   - name: Checkout
-    #     uses: actions/checkout@v2
-    #     with:
-    #       ref: ${{ github.ref }}
-    #       fetch-depth: 0
-    #       persist-credentials: false
-    #   - name: Setup Node.js
-    #     uses: actions/setup-node@v2.5.1
-    #     with:
-    #       node-version: 16
-    #   - name: Restore Node.js modules
-    #     id: cache-node-modules
-    #     uses: actions/cache@v2.1.7
-    #     with:
-    #       path: node_modules
-    #       key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-    #   - name: Install
-    #     if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
-    #     run: yarn install
-    #   - name: Release
-    #     run: yarn semantic-release
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GHP_TOKEN }}
-    #       NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GHP_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
