@@ -1,4 +1,4 @@
-name: Continuous Integration for Node.js®
+name: Continuous Integration
 
 on:
   push:
