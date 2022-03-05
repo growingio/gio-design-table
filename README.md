@@ -1,13 +1,13 @@
-# GrowingIO Design Charts
+# GrowingIO Design Table
 
 一套基于 [@antv/s2](https://s2.antv.vision/zh) 的透视表格 React 组件库
 
-![Build](https://img.shields.io/github/checks-status/growingio/gio-design-charts/master)
-![Sonar](https://img.shields.io/sonar/coverage/gio-design-charts?server=http%3A%2F%2Fsonarcloud.io)
-![Quality Gate](https://img.shields.io/sonar/quality_gate/gio-design-charts?server=https%3A%2F%2Fsonarcloud.io)
-![Npm Version](https://img.shields.io/npm/v/@gio-design/charts)
-![Release](https://img.shields.io/github/release-date/growingio/gio-design-charts)
-![Score](https://img.shields.io/npms-io/final-score/@gio-design/charts)
+![Build](https://img.shields.io/github/checks-status/growingio/gio-design-table/master)
+![Sonar](https://img.shields.io/sonar/coverage/gio-design-table?server=http%3A%2F%2Fsonarcloud.io)
+![Quality Gate](https://img.shields.io/sonar/quality_gate/gio-design-table?server=https%3A%2F%2Fsonarcloud.io)
+![Npm Version](https://img.shields.io/npm/v/@gio-design/table)
+![Release](https://img.shields.io/github/release-date/growingio/gio-design-table)
+![Score](https://img.shields.io/npms-io/final-score/@gio-design/table)
 
 ![License](https://img.shields.io/github/license/growingio/gio-design)
 
@@ -18,15 +18,16 @@
 - Storybook
 - Typescript
 - @gio-design/components
+
 ## 📦 Installation
 
 ```bash | pure
-$ npm install @gio-design/s2-table
+npm install @gio-design/s2-table
 ```
 
 ## View in Website
 
-```
+```bash
 yarn storybook
 ```
 
@@ -38,6 +39,6 @@ yarn storybook
 
 Powered by
 
-<p>
-  <a href="https://gio-design-charts.vercel.app/?path=/story/charts-dashboard--dashboard" target="_blank"><img src="https://gio-design-charts.vercel.app/favicon-32x32.png" alt="Vercel Inc." height=32 /></a>
-</p>
+<a href="https://gio-design-table.vercel.app/?path=/story/table-dashboard--dashboard" target="_blank">
+  <img src="https://gio-design-table.vercel.app/favicon-32x32.png" alt="Vercel Inc." height=32 />
+</a>
