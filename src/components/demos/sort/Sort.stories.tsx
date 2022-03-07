@@ -1,8 +1,7 @@
 import { SortParams } from '@antv/s2';
-import { SheetProps } from '../../../../dist';
+import { SheetProps } from '../../../index';
 import { DataTable } from '../../sheet';
-// import Docs from './Table.mdx';
-import dataCfg from '../pivot-data'
+import { data } from '../data/sort-data'
 
 export default {
   title: '排序/表格排序',
@@ -26,31 +25,21 @@ export function Default() {
       height: 480,
       hierarchyType: 'grid',
       conditions: {
-        background: [
-          {
-            field: 'number',
-            mapping() {
-              return {
-                // fill 是背景字段下唯一必须的字段，用于指定文本颜色
-                fill: '',
-              };
-            },
-          },
-        ],
+
       },
     },
     dataConfig: {
-      fields: {
-        rows: ['province', 'city'],
-        columns: ['type', 'sub_type'],
-        values: ['number'],
-        valueInCols: true,
-      },
-      meta: dataCfg.meta,
-      data: dataCfg.data,
-      totalData: dataCfg.totalData as any
+      fields: data.fields,
+      meta: data.meta,
+      data: data.originData,
+      totalData: data.totalData as any,
+      // sortParams: [
+      //   { sortFieldId: 'province', sortBy: ['吉林', '浙江'] },
+      //   { sortFieldId: 'city', sortBy: ['舟山', '杭州', '白山', '丹东'] },
+      //   { sortFieldId: 'type', sortBy: ['纸张', '笔'] },
+      // ]
     },
-    onSortChange: (params: SortParams) => { console.log('onSortChange', params) }
+    onRangeSort: (params: SortParams) => { console.log('onRangeSort', params) }
   }
   return (<div className='table-demo-box'>
     <DataTable {...props} />

@@ -37,8 +37,7 @@ export function TooltipOperator(props: TooltipOperatorProps) {
     />);
     return (
       <Item value={menu.key} prefix={icon}
-        onClick={(v, e) => {
-          console.log('list item click===>', v, e, cell)
+        onClick={() => {
           menu.onClick?.(cell)
         }}>
         {menu.text}
@@ -68,9 +67,9 @@ export function TooltipOperator(props: TooltipOperatorProps) {
       return (
         <List
           className={`${tooltipPrefixCls}-operator-menus`}
-          onClick={(v, e) => {
-            console.log('list onlyMenu click', v, e)
-            onMenuClick?.(v, e)
+          onClick={(key, e) => {
+            // console.log('list onlyMenu click', v, e)
+            onMenuClick?.({ key }, cell, e)
           }}
         >
           {map(menus, (operatorMenu: TooltipOperatorMenu) => renderMenu(operatorMenu))}
@@ -83,7 +82,9 @@ export function TooltipOperator(props: TooltipOperatorProps) {
       const menuRender = !isEmpty(children) ? (
         <List
           className={`${tooltipPrefixCls}-operator-menus`}
-          onClick={onMenuClick}
+          onClick={(_key, e) => {
+            onMenuClick?.({ key: _key }, cell, e)
+          }}
         >
           {map(menus, (operatorMenu: TooltipOperatorMenu) => renderMenu(operatorMenu))}
         </List>
