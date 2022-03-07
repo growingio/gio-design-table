@@ -1,7 +1,7 @@
 /* eslint-disable dot-notation */
-import { toNumber } from "lodash";
+/* eslint-disable no-param-reassign */
 export const formatNumber = (value: number | string, decimalCount = 2, intSuffixZeroFill = false) => {
-  if (!isFinite(value as number)) {
+  if (!Number.isFinite(value as number)) {
     return value || '';
   }
 
@@ -12,7 +12,7 @@ export const formatNumber = (value: number | string, decimalCount = 2, intSuffix
   }
 
   value = value || 0;
-  const intValue = parseInt(value + '', 10);
+  const intValue = parseInt(`${value}`, 10);
   const decimalValue = (value as number) - intValue;
   let decimalValueStr;
   if (intValue === 0 && decimalCount > 0) {
@@ -22,7 +22,7 @@ export const formatNumber = (value: number | string, decimalCount = 2, intSuffix
   }
   const result = String(Number((intValue + parseFloat(decimalValueStr)).toFixed(decimalCount)));
 
-  const fillStr = intSuffixZeroFill ? '.' + '0'.repeat(decimalCount) : '';
+  const fillStr = intSuffixZeroFill ? `.${'0'.repeat(decimalCount)}` : '';
   const decimalPart = result.indexOf('.') >= 0 ? result.slice(result.indexOf('.')) : fillStr;
 
   let intPart = result.slice(0, result.indexOf('.') >= 0 ? result.indexOf('.') : result.length);
@@ -30,7 +30,7 @@ export const formatNumber = (value: number | string, decimalCount = 2, intSuffix
     .split('')
     .map((char, index) => {
       const dotIndex = intPart.length - index - 1;
-      return dotIndex % 3 === 0 && dotIndex !== 0 ? char + ',' : char;
+      return dotIndex % 3 === 0 && dotIndex !== 0 ? `${char},` : char;
     })
     .join('');
   return sign + intPart + decimalPart;
@@ -45,8 +45,8 @@ export const formatPercent = (value: string | number, decimalCount?: number, int
   if (!value) {
     return '0%';
   }
-  return !isNaN(Number(value))
-    ? formatNumber((Number(value) || 0) * 100, decimalCount, intSuffixZeroFill) + '%'
+  return !Number.isNaN(Number(value))
+    ? `${formatNumber((Number(value) || 0) * 100, decimalCount, intSuffixZeroFill)}%`
     : value;
 };
 interface LooseObject {
@@ -62,7 +62,7 @@ export const transformData = (
     const row = {} as LooseObject;
     columns?.forEach((column: LooseObject, index: number) => {
       const value = item?.[index];
-      let _formatter = (v: number | string) => v;
+      const _formatter = (v: number | string) => v;
       // if (typeof value === 'number' && column?.format === 'percent') {
       //   _formatter = (v) => (toNumber(v)) * 100;
       // }
@@ -76,7 +76,7 @@ export const transformData = (
 
   const meta = columns.map((c) => {
     const res = { field: c.id, name: c.name, ...c, }
-    //formatter=(value: unknown, data?: Data | Data[]) => string
+    // formatter=(value: unknown, data?: Data | Data[]) => string
     if (c.format === 'percent') {
       res.formatter = (v: string | number) => formatPercent(v, 2)
     }

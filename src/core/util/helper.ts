@@ -62,17 +62,17 @@ export function computeArrayPosition(arrayLength: number, fieldValue: number, mi
     }
   }
   const mid = Math.ceil((arrayLength - 1) / 2);
-  //数值0 始终返回数组中间值;
+  // 数值0 始终返回数组中间值;
   if (current === 0) {
     return mid;
   }
   if (current < 0) {
     const idx = mid - Math.ceil(parseNumberWithPrecision((-current) / 2) * arrayLength);
     return clamp(idx, 0, arrayLength - 1);
-  } else {
+  } 
     const idx = mid + Math.ceil(parseNumberWithPrecision(current / 2) * arrayLength);
     return clamp(idx, 0, arrayLength - 1);
-  }
+  
 
 }
 export function getValueRangeByField(spreadSheet: SpreadSheet, originData: DataType[], field: string): ValueRange {
