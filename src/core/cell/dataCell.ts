@@ -1,8 +1,7 @@
 import { DataCell, TextTheme } from '@antv/s2'
 import { isEmpty, isNil } from 'lodash';
-import { parseNumberWithPrecision } from '../../../utils';
-import { computeArrayPosition } from './util'
-import { CELL_COLOR_MAP } from '../../../common'
+import { parseNumberWithPrecision, computeArrayPosition } from '../util'
+import { CELL_COLOR_MAP } from '../../common'
 /**
  * dataCell背景标注的颜色 [backgroudColor,textColor]
  */
@@ -63,6 +62,7 @@ export class CustomDataCell extends DataCell {
 
 
   private computeColorMapPosition(fieldValue: number, minValue?: number, maxValue?: number) {
+
     return computeArrayPosition(CellColorMap.length, fieldValue, minValue, maxValue);
   }
 
@@ -90,19 +90,16 @@ export class CustomDataCell extends DataCell {
         const { minValue, maxValue } = attrs.isCompare
           ? attrs
           : this.spreadsheet.dataSet.getValueRangeByField(this.meta.valueField);
-        // 'KnGnL3QR'
-        // if (this.meta.valueField == 'KnGnL3QR') {
-        //   console.log('........', this.meta);
-        //   console.log(minValue, maxValue, this.meta.fieldValue)
-        // }
+
 
         const fieldValue = parseNumberWithPrecision(
           this.meta.fieldValue as number,
         );
+
         const index = this.computeColorMapPosition(fieldValue, minValue, maxValue);
 
         const calculateBgColor = CellColorMap[index];
-        const fill = !isEmpty(attrs.fill) ? attrs.fill : calculateBgColor[0];
+        const fill = !isEmpty(attrs.fill) ? attrs.fill : calculateBgColor?.[0];
         backgroundColor = fill
       }
     }

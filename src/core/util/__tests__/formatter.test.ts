@@ -2,6 +2,9 @@ import { parseNumberWithPrecision } from '../formatter'
 
 describe('formatter tests', () => {
   it('parseNumberWithPrecision', () => {
+    console.log(parseNumberWithPrecision(1 / 2) * 11)
+    const b = Math.ceil(parseNumberWithPrecision(1 / 2) * 11) - 1;
+    expect(b).toEqual(5);
     const n1 = parseNumberWithPrecision(6 / 10);
     expect(n1).toEqual(0.6);
     const n2 = parseNumberWithPrecision(6 * 0.1);

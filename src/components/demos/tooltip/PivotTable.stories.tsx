@@ -7,7 +7,7 @@ import { DataTable } from '../../sheet';
 import dataCfg from '../pivot-data'
 
 export default {
-  title: 'Tooltip',
+  title: '组件/Tooltip',
   argTypes: {
     backgroundColor: { control: 'color' },
   },

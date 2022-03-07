@@ -42,7 +42,6 @@ const parseAdaptive = (defaultContainer?: HTMLElement, adaptive?: Adaptive) => {
 
 export const useResize = (props: UseResizeEffectProps) => {
   const { s2, adaptive = false, containerRef, wrapperRef } = props;
-
   const [adaptiveState, setAdaptiveState] = useState<{
     container?: HTMLElement;
     adaptiveWidth: boolean;
@@ -60,7 +59,7 @@ export const useResize = (props: UseResizeEffectProps) => {
 
   const render = useCallback(
     (width: number, height: number) => {
-      s2.changeSize(width, height);
+      s2.changeSheetSize(width, height);
       s2.render(false);
       isFirstRender.current = false;
     },
@@ -68,6 +67,11 @@ export const useResize = (props: UseResizeEffectProps) => {
   );
   const debounceRender = debounce(render, RENDER_DELAY);
 
+  useEffect(() => {
+    if (!adaptive && s2) {
+      s2.render(false);
+    }
+  }, [s2?.options.width, s2?.options.height, adaptive, s2]);
 
   useLayoutEffect(() => {
     const { container: wrapper, adaptiveWidth, adaptiveHeight } = adaptiveState || {};

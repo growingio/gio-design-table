@@ -5,7 +5,7 @@ import { DataTable } from '../../sheet';
 import dataCfg from '../pivot-data'
 
 export default {
-  title: '表格排序',
+  title: '排序/表格排序',
   argTypes: {
     backgroundColor: { control: 'color' },
   },

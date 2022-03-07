@@ -80,7 +80,6 @@ export function TooltipComponent(props: TooltipRenderProps) {
 
   const renderContent = () => {
     const option = getTooltipDefaultOptions(options);
-    console.log('tooltip renderContent', option)
     const { operator, onlyMenu } = option;
     const { summaries, headInfo, details, interpretation, infos, tips, name } =
       data || {};

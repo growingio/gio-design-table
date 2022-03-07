@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SpreadSheet
 } from '@antv/s2';
-import { usePrefixCls } from '@gio-design/utils'
+import { useControlledState, usePrefixCls } from '@gio-design/utils'
 import { Loading } from '@gio-design/components';
 import { SheetProps } from '../../../interfaces';
 import { useSpreadSheet } from '../../../hooks';
@@ -12,9 +12,10 @@ import './index.less';
 
 export const BaseSheet = React.forwardRef(
   (props: SheetProps, ref: React.ForwardedRef<SpreadSheet | undefined>) => {
-    const { options = {}, type: sheetType = 'pivot', prefixCls: customizePrefixCls, header = { legendConfig: { open: true } } } = props;
+    const { options = {}, type: sheetType = 'pivot', prefixCls: customizePrefixCls, loading: propsLoading = false, header = { legendConfig: { open: true } } } = props;
     const prefixCls = usePrefixCls('d-table', customizePrefixCls);
-    const s2Options = getSheetComponentOptions(options)
+    const s2Options = getSheetComponentOptions(options);
+    const [innerLoading] = useControlledState(propsLoading, false);
     const { s2Ref, loading, containerRef, wrapRef } = useSpreadSheet(props, {
       sheetType,
     });
@@ -28,7 +29,7 @@ export const BaseSheet = React.forwardRef(
 
     return (
       <React.StrictMode>
-        <Loading loading={loading}>
+        <Loading loading={loading || innerLoading}>
           <div ref={wrapRef as React.RefObject<HTMLDivElement>} className={`${prefixCls}-wrapper`}>
             {header && (
               <Header
