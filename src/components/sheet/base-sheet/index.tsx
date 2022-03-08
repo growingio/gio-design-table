@@ -29,7 +29,7 @@ export const BaseSheet = React.forwardRef(
 
     return (
       <React.StrictMode>
-        <Loading loading={loading || innerLoading}>
+        <Loading loading={innerLoading || loading}>
           <div ref={wrapRef as React.RefObject<HTMLDivElement>} className={`${prefixCls}-wrapper`}>
             {header && (
               <Header

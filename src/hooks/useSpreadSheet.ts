@@ -38,7 +38,6 @@ export const useSpreadSheet = (
   const prevOptions = usePrevious(options);
   const prevThemeCfg = usePrevious(themeConfig);
   const forceUpdate = useForceUpdate();
-
   useEvents(props, s2Ref.current);
   const renderSpreadSheet = useCallback(
     (container: HTMLDivElement) => {
@@ -61,6 +60,7 @@ export const useSpreadSheet = (
     s2Ref.current.setThemeCfg(themeConfig);
     s2Ref.current.render();
     setLoading(false);
+    // 子hook 依赖了s2Ref.current ，需要强制刷新，以便子hook 触发rerender
     forceUpdate();
   }, [props, renderSpreadSheet, setLoading, config, forceUpdate]);
 
@@ -93,9 +93,11 @@ export const useSpreadSheet = (
     if (!Object.is(prevThemeCfg, themeConfig)) {
       s2Ref.current?.setThemeCfg(themeConfig);
     }
+
     s2Ref.current?.render(reloadData, reBuildDataSet);
-    // 子hook 依赖了s2Ref.current ，需要强制刷新，以便子hook 触发rerender
-    forceUpdate();
+    if (reloadData || reBuildDataSet) {
+      forceUpdate();
+    }
   }, [dataConfig, options, prevDataCfg, prevOptions, prevThemeCfg, themeConfig]);
 
   useResize({

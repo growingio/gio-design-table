@@ -56,7 +56,6 @@ export const useResize = (props: UseResizeEffectProps) => {
 
   // 第一次自适应时不需要 debounce, 防止抖动
   const isFirstRender = React.useRef<boolean>(true);
-
   const render = useCallback(
     (width: number, height: number) => {
       s2.changeSheetSize(width, height);
@@ -65,11 +64,14 @@ export const useResize = (props: UseResizeEffectProps) => {
     },
     [s2],
   );
-  const debounceRender = debounce(render, RENDER_DELAY);
 
+  const debounceRender = debounce(render, RENDER_DELAY);
   useEffect(() => {
     if (!adaptive && s2) {
       s2.render(false);
+    } else {
+      s2?.container.draw();
+      s2?.render(true, true);
     }
   }, [s2?.options.width, s2?.options.height, adaptive, s2]);
 

@@ -1,5 +1,12 @@
 /* eslint-disable dot-notation */
 /* eslint-disable no-param-reassign */
+import { format } from 'date-fns';
+import { zhCN } from 'date-fns/locale';
+
+export const formatDateByTs = (text: string | number) =>
+  !Number.isNaN(Number(text)) ? format(new Date(Number(text)), 'MM/dd EEE', { locale: zhCN }) : text;
+
+
 export const formatNumber = (value: number | string, decimalCount = 2, intSuffixZeroFill = false) => {
   if (!Number.isFinite(value as number)) {
     return value || '';
@@ -61,14 +68,12 @@ export const transformData = (
   const data = source.map((item: LooseObject) => {
     const row = {} as LooseObject;
     columns?.forEach((column: LooseObject, index: number) => {
-      const value = item?.[index];
-      const _formatter = (v: number | string) => v;
-      // if (typeof value === 'number' && column?.format === 'percent') {
-      //   _formatter = (v) => (toNumber(v)) * 100;
-      // }
-      // const _formatter = formatter || defaultFormatter(column, chartType);
+      let value = item?.[index];
+      if (column.id === 'tm') {
+        value = formatDateByTs(value)
+      }
+      row[column.id] = value;
 
-      row[column.id] = _formatter(value);
       row.name = column?.name;
     });
     return row;
@@ -80,6 +85,7 @@ export const transformData = (
     if (c.format === 'percent') {
       res.formatter = (v: string | number) => formatPercent(v, 2)
     }
+
     return res;
   });
 

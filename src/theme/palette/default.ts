@@ -14,16 +14,16 @@ export const paletteDefault: Palette = {
     '#3867F4',// blue2
     '#1248E9',// blue3
     '#5771A5',
-    '#DEE7FF',// positive1
-    '#BBCCFF',// positive2
-    '#8CA9FF',// positive3
-    '#4875FB',// positive4
-    '#1649DF',// positive5
-    '#FAF3B5',// negative1
-    '#F7EB81',// negative2
-    '#EDDD44',// negative3
-    '#D5C100',// negative4
-    '#AE9E03',// negative5
+    // '#DEE7FF',// positive1
+    // '#BBCCFF',// positive2
+    // '#8CA9FF',// positive3
+    // '#4875FB',// positive4
+    // '#1649DF',// positive5
+    // '#FAF3B5',// negative1
+    // '#F7EB81',// negative2
+    // '#EDDD44',// negative3
+    // '#D5C100',// negative4
+    // '#AE9E03',// negative5
   ],
 
   // ---------- semantic colors ----------

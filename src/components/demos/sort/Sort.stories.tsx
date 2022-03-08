@@ -29,7 +29,11 @@ export function Default() {
       },
     },
     dataConfig: {
-      fields: data.fields,
+      fields: {
+        rows: ["province", "city"],
+        columns: ["type"],
+        values: ["cost"]
+      },
       meta: data.meta,
       data: data.originData,
       totalData: data.totalData as any,

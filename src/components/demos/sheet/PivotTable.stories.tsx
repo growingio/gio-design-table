@@ -53,6 +53,7 @@ Default.args = {
     data: dataCfg.data,
     totalData: dataCfg.totalData as unknown as Data[]
   },
+  onCopied: (data) => { console.log('onCopied', data) }
 
 };
 export const Tree: ComponentStory<typeof DataTable> = () => {
