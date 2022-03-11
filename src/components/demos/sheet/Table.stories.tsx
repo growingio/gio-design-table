@@ -26,6 +26,18 @@ export const Default = Template.bind({});
 const options = {
   width: 600,
   height: 480,
+  conditions: {
+    background: [
+      {
+        field: 'price',
+        mapping() {
+          return {
+            fill: ''
+          }
+        }
+      }
+    ]
+  }
 };
 Default.args = {
   options,
@@ -181,6 +193,7 @@ export const ShowSeriesNumber: ComponentStory<typeof DataTable> = () => {
     width: 600,
     height: 480,
     showSeriesNumber: true,
+
   };
   return <div
     className='table-demo-box'>

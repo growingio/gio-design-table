@@ -3,10 +3,10 @@ import {
   S2Options, SpreadSheet, SpreadSheetFacetCfg, ViewMeta, ColHeaderConfig,
   S2MountContainer, S2DataConfig, customMerge, TooltipOperatorOptions,
   SortMethod, InterceptType, S2Event,
-  TOOLTIP_OPERATOR_SORT_MENUS, EXTRA_FIELD, SortParam, CornerNodeType
+  TOOLTIP_OPERATOR_SORT_MENUS, EXTRA_FIELD, SortParam, CornerNodeType, TOOLTIP_OPERATOR_TABLE_SORT_MENUS
 } from "@antv/s2";
 import { Event as CanvasEvent } from '@antv/g-canvas';
-import { clone, last } from "lodash";
+import { clone, first, isEqual, last } from "lodash";
 import { GioPivotDataSet, GioCustomTreePivotDataSet } from "../data-set";
 import { CustomDataCell as GioDataCell } from '../cell/dataCell'
 import { CustomCornerCell } from "../cell/cornerCell";
@@ -76,15 +76,18 @@ export class CustomPivotSheet extends PivotSheet {
   public handleGroupSort(event: CanvasEvent, meta: Node) {
     event.stopPropagation();
     this.interaction.addIntercepts([InterceptType.HOVER]);
+    const isCornerRow = meta.cornerType === CornerNodeType.Row;
+    const { rows } = this.dataCfg.fields;
+    const isFirstCol = meta.isPivotMode && isCornerRow && isEqual(first(rows), meta.field);
     const operator: TooltipOperatorOptions = {
       onClick: (arg) => {
         const { key } = arg as any;
-        console.log('sort menu click:', arg)
+        // console.log('sort menu click:', arg)
         this.groupSortByMethod(key as unknown as SortMethod, meta);
         // 排序事件完成触发
         this.emit(S2Event.RANGE_SORTED, event);
       },
-      menus: TOOLTIP_OPERATOR_SORT_MENUS,
+      menus: isFirstCol ? TOOLTIP_OPERATOR_TABLE_SORT_MENUS : TOOLTIP_OPERATOR_SORT_MENUS
     };
 
     this.showTooltipWithInfo(event, [], {
