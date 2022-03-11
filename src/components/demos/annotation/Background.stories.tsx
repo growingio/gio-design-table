@@ -75,7 +75,7 @@ function getDataAsync(data: any, delay = 500) {
     }, delay)
   })
 }
-export function Simple1() {
+export const Simple1 = () => {
   const [data, setData] = useState<SheetProps['dataConfig']>({} as SheetProps['dataConfig']);
 
   useEffect(() => {

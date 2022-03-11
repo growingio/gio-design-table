@@ -16,7 +16,7 @@ const { Item } = List;
 interface TooltipOperatorProps extends TooltipOperatorOptions {
   onlyMenu?: boolean;
   cell: S2CellType;
-  // onClick: (...args: unknown[]) => void;
+  // onClick?: (...args: unknown[]) => void;
 }
 
 /**

@@ -4,7 +4,7 @@ import {
 } from '@antv/s2';
 import { useControlledState, usePrefixCls } from '@gio-design/utils'
 import { Loading } from '@gio-design/components';
-import { SheetProps } from '../../../interfaces';
+import { SheetProps } from '../../interfaces';
 import { useSpreadSheet } from '../../../hooks';
 import { getSheetComponentOptions } from '../../../utils';
 import { Header } from '../../header'

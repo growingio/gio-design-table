@@ -6,7 +6,7 @@ import {
 } from '@antv/s2';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { CustomPivotSheet, CustomTableSheet } from '../core/sheet-type';
-import type { BaseSheetProps, SheetType } from '../interfaces';
+import type { BaseSheetProps, SheetType } from '../components/interfaces';
 import { themeDefault } from '../theme';
 import { getSheetComponentOptions } from '../utils';
 import { useEvents } from './useEvents';

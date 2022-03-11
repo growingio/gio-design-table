@@ -67,8 +67,8 @@ export const Tree: ComponentStory<typeof DataTable> = () => {
     },
     dataConfig: {
       fields: {
-        rows: ['province', 'city'],
-        columns: ['type', 'sub_type'],
+        rows: ['province', 'city', 'type'],
+        // columns: ['sub_type'],
         values: ['number'],
         valueInCols: true,
       },

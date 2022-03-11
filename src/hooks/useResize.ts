@@ -2,7 +2,7 @@
 import React, { useCallback, useLayoutEffect, useEffect, useState } from 'react';
 import { debounce, round } from 'lodash';
 import type { SpreadSheet } from '@antv/s2';
-import { Adaptive } from '../interfaces';
+import { Adaptive } from '../components/interfaces';
 
 export interface UseResizeEffectProps {
   containerRef: React.MutableRefObject<HTMLElement | undefined>;

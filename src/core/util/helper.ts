@@ -37,8 +37,8 @@ export function getScale(_minValue = 0, _maxValue = 0) {
     realMin = 0;
   }
   return (current: number) =>
-    // max percentage shouldn't be greater than 100%
-    // min percentage shouldn't be less than 0%
+    // max value shouldn't be greater than 1
+    // min value shouldn't be less than -1
     clamp((current - realMin) / distance, -1, 1);
 }
 
@@ -69,10 +69,10 @@ export function computeArrayPosition(arrayLength: number, fieldValue: number, mi
   if (current < 0) {
     const idx = mid - Math.ceil(parseNumberWithPrecision((-current) / 2) * arrayLength);
     return clamp(idx, 0, arrayLength - 1);
-  } 
-    const idx = mid + Math.ceil(parseNumberWithPrecision(current / 2) * arrayLength);
-    return clamp(idx, 0, arrayLength - 1);
-  
+  }
+  const idx = mid + Math.ceil(parseNumberWithPrecision(current / 2) * arrayLength);
+  return clamp(idx, 0, arrayLength - 1);
+
 
 }
 export function getValueRangeByField(spreadSheet: SpreadSheet, originData: DataType[], field: string): ValueRange {

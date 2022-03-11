@@ -7,7 +7,7 @@ import {
 } from '@antv/s2';
 import { useEffect } from 'react';
 import { Event as GEvent } from '@antv/g-canvas';
-import { BaseSheetProps } from '../interfaces';
+import { BaseSheetProps } from '../components/interfaces';
 
 export type EventName = keyof EmitterType
 export const useCellEvent = (

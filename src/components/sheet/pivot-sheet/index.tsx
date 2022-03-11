@@ -1,7 +1,7 @@
 import React from 'react';
 import { SpreadSheet, customMerge } from '@antv/s2';
 import { BaseSheet } from '../base-sheet';
-import { SheetProps } from '../../../interfaces';
+import { SheetProps } from '../../interfaces';
 
 export const PivotSheet: React.FC<SheetProps> = React.memo(
   (props) => {

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { SpreadSheet } from '@antv/s2';
 import { BaseSheet } from '../base-sheet';
-import { SheetProps } from '../../../interfaces';
+import { SheetProps } from '../../interfaces';
 
 export const TableSheet: React.FC<SheetProps> = React.memo(
   (props) => {

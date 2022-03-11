@@ -1,6 +1,7 @@
-import { Palette } from '@antv/s2'
+import { CELL_COLOR_MAP } from '../../common';
+import { ThemePalette } from '../../core';
 
-export const paletteDefault: Palette = {
+export const paletteDefault: ThemePalette = {
   // --------- basic colors -----------
   basicColors: [
     '#242E59',// gray5
@@ -31,4 +32,5 @@ export const paletteDefault: Palette = {
     red: '#EC134B',
     green: '#16CB79',
   },
+  bgConditionColors: CELL_COLOR_MAP
 };

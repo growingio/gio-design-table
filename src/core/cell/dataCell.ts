@@ -25,7 +25,6 @@ const CellColorMap = CELL_COLOR_MAP;
 export class CustomDataCell extends DataCell {
 
 
-
   protected getTextStyle(): TextTheme {
     const { isTotals } = this.meta;
     const textStyle = isTotals
@@ -57,6 +56,11 @@ export class CustomDataCell extends DataCell {
     if (textCondition?.mapping) {
       fill = this.mappingValue(textCondition)?.fill;
     }
+    // let { textAlign } = textStyle;
+    // console.log('cell->fieldValue', this.meta.spreadsheet.isTableMode(), this.meta.fieldValue, isNumber(this.meta.fieldValue))
+    // if (this.meta.spreadsheet.isTableMode() && !isNumber(this.meta.fieldValue)) {
+    //   textAlign = 'left';
+    // }
     return { ...textStyle, fill };
   }
 

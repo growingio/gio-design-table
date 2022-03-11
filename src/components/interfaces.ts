@@ -1,11 +1,8 @@
 import {
-  S2DataConfig,
-  S2Options,
   CellScrollPosition,
   TargetCellInfo,
   S2Constructor,
   SpreadSheet,
-  ThemeCfg,
   ViewMeta,
   LayoutResult,
   SortParams,
@@ -18,7 +15,8 @@ import {
   Data
 } from '@antv/s2';
 import { Event as CanvasEvent } from '@antv/g-canvas';
-import { HeaderConfigProps } from './components/header';
+import { HeaderConfigProps } from './header';
+import { GioS2DataConfig, GioS2Options, GioThemeConfig } from '../core/interfaces';
 /**
  * 表格类型: 透视表｜明细表
  */
@@ -150,11 +148,11 @@ export interface BaseSheetEventsProps {
   onLinkFieldJump?: (data: { key: string; record: Data }) => void;
 
 }
-export type ThemeConfig = Omit<ThemeCfg, 'name'>
+export type ThemeConfig = Omit<GioThemeConfig, 'name'>
 export interface BaseSheetProps extends BaseSheetEventsProps {
   spreadsheet?: (...args: S2Constructor) => SpreadSheet;
-  dataConfig: S2DataConfig;
-  options: S2Options;
+  dataConfig: GioS2DataConfig;
+  options: GioS2Options;
   loading?: boolean;
 
   // partDrillDown?: PartDrillDown;

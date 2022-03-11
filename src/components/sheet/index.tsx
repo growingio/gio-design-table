@@ -3,7 +3,7 @@ import { SpreadSheet } from '@antv/s2';
 import { IntlProvider } from 'react-intl';
 import { DesignContext } from '@gio-design/utils';
 import { TableSheet } from './table-sheet';
-import { SheetProps } from '../../interfaces';
+import { SheetProps } from '../interfaces';
 import { PivotSheet } from './pivot-sheet';
 import en from '../../locales/en.json';
 
