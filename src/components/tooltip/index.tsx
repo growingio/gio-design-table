@@ -8,8 +8,7 @@ import {
   TooltipHeadInfo as TooltipHeadInfoType,
   TooltipInterpretationOptions,
   getTooltipDefaultOptions,
-  setEVALocale,
-  i18n
+  setEVALocale
 } from '@antv/s2';
 import { DesignContext } from '@gio-design/utils';
 import { IntlProvider } from 'react-intl';
