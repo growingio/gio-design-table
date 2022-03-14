@@ -159,7 +159,7 @@ export interface ConditionsConfig extends Omit<Conditions, 'background'> {
   background: ConditionConfig[]
 }
 export interface OptionsConfig extends Omit<GioS2Options, 'conditions'> {
-  conditions: ConditionsConfig
+  conditions?: ConditionsConfig
 }
 export interface BaseSheetProps extends BaseSheetEventsProps {
   spreadsheet?: (...args: S2Constructor) => SpreadSheet;

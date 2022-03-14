@@ -1,6 +1,5 @@
 import { i18n as s2I18n, TooltipOperatorMenu } from "@antv/s2";
 
-console.log('sortMenus.......', s2I18n('组内升序'));
 export type i18nFunc = typeof s2I18n;
 export const getSortMenus: (i18n: i18nFunc) => TooltipOperatorMenu[] = (i18n) => [
   {
