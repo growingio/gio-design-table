@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { CustomPivotSheet, CustomTableSheet } from '../core/sheet-type';
 import type { BaseSheetProps, SheetType } from '../components/interfaces';
 import { themeDefault } from '../theme';
-import { getSheetComponentOptions } from '../utils';
+import { getSheetComponentOptions, getSheetConditionsOption } from '../utils';
 import { useEvents } from './useEvents';
 import { useForceUpdate } from './useForceUpdate';
 import { useLoading } from './useLoading';
@@ -39,9 +39,17 @@ export const useSpreadSheet = (
   const prevThemeCfg = usePrevious(themeConfig);
   const forceUpdate = useForceUpdate();
   useEvents(props, s2Ref.current);
+  function getOptions(_options: BaseSheetProps['options']) {
+    // 此处将扩展的背景标注参数 转换为S2 可识别的参数
+    const conditions = getSheetConditionsOption((_options as BaseSheetProps['options']).conditions)
+    const s2Options = getSheetComponentOptions(_options, { conditions });
+    return s2Options;
+  }
   const renderSpreadSheet = useCallback(
     (container: HTMLDivElement) => {
-      const s2Options = config.s2Options || getSheetComponentOptions(options);
+      // 此处将扩展的背景标注参数 转换为S2 可识别的参数
+      const s2Options = getOptions(options);
+      // const s2Options = config.s2Options || getSheetComponentOptions(options);
       const s2ConstructorArgs: S2Constructor = [container, dataConfig, s2Options];
       if (customSpreadSheet) {
         return customSpreadSheet(...s2ConstructorArgs);
@@ -88,7 +96,9 @@ export const useSpreadSheet = (
         reloadData = true;
         s2Ref.current?.setDataCfg(dataConfig);
       }
-      s2Ref.current?.setOptions(options);
+      // 此处将扩展的背景标注参数 转换为S2 可识别的参数
+      const s2Options = getOptions(options);
+      s2Ref.current?.setOptions(s2Options);
     }
     if (!Object.is(prevThemeCfg, themeConfig)) {
       s2Ref.current?.setThemeCfg(themeConfig);

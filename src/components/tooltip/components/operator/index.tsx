@@ -1,6 +1,8 @@
 import { isEmpty, map } from 'lodash';
+import React, { useEffect, useState } from 'react';
 import {
   S2CellType,
+  SortParam,
   TooltipOperatorMenu,
   TooltipOperatorOptions,
 } from '@antv/s2';
@@ -29,6 +31,11 @@ interface TooltipOperatorProps extends TooltipOperatorOptions {
 export function TooltipOperator(props: TooltipOperatorProps) {
   const { menus, onlyMenu, onClick: onMenuClick, cell } = props;
   const tooltipPrefixCls = usePrefixCls(TOOLTIP_PREFIX_CLS);
+  const sortParam: SortParam = (cell as any).headerConfig?.sortParam;
+  const [currentValue, setValue] = useState<string | undefined>()
+  useEffect(() => {
+    setValue(sortParam?.sortMethod)
+  }, [sortParam?.sortMethod]);
 
   const renderTitle = (menu: TooltipOperatorMenu) => {
     const icon = menu.icon && (<Icon
@@ -64,11 +71,13 @@ export function TooltipOperator(props: TooltipOperatorProps) {
 
   const renderMenus = () => {
     if (onlyMenu) {
+
       return (
         <List
+          value={currentValue}
           className={`${tooltipPrefixCls}-operator-menus`}
           onClick={(key, e) => {
-            // console.log('list onlyMenu click', v, e)
+            setValue(key as string);
             onMenuClick?.({ key }, cell, e)
           }}
         >

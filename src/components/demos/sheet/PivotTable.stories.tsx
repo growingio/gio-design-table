@@ -37,7 +37,16 @@ const options: SheetProps['options'] = {
       showTooltip: false,
     },
   },
-
+  totals: {
+    row: {
+      showGrandTotals: true,
+      showSubTotals: true,
+    },
+    col: {
+      showGrandTotals: true,
+      showSubTotals: true,
+    }
+  }
 
 };
 Default.args = {
@@ -63,14 +72,23 @@ export const Tree: ComponentStory<typeof DataTable> = () => {
       width: 600,
       height: 480,
       hierarchyType: 'tree',
-
+      totals: {
+        row: {
+          showGrandTotals: true,
+          showSubTotals: true,
+        },
+        col: {
+          showGrandTotals: true,
+          showSubTotals: true,
+        }
+      }
     },
     dataConfig: {
       fields: {
-        rows: ['province', 'city', 'type'],
-        // columns: ['sub_type'],
+        rows: ['province', 'city'],
+        columns: ['sub_type'],
         values: ['number'],
-        valueInCols: true,
+        valueInCols: false,
       },
       meta: dataCfg.meta,
       data: dataCfg.data,

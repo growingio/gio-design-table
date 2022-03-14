@@ -12,10 +12,7 @@ export class CustomColCell extends ColCell {
     const sort = sortMeta.find(s => s.field === field);
     const noSort = isEqual(sort?.canSort, false);
     const isSortCell = this.isSortCell() && !noSort; // 当前单元格是否为需要展示排序 icon 单元格
-    ///----------
-    // const data = this.headerConfig.data;
-    // console.log('custom colcell handleRestOptions', { isSortCell, sortParams, value, query, cornerNodes: data })
-    ///------------
+
     const sortParam = find(
       sortParams?.reverse(),
       (item) =>

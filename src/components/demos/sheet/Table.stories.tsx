@@ -66,6 +66,7 @@ Default.args = {
       },
     ],
     data: prod as any,
+    sortMeta: [{ field: 'city', canSort: false }]
   },
   type: 'table'
 }

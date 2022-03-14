@@ -3,7 +3,7 @@ import {
   S2Options, SpreadSheet, SpreadSheetFacetCfg, ViewMeta, ColHeaderConfig,
   S2MountContainer, S2DataConfig, customMerge, TooltipOperatorOptions,
   SortMethod, InterceptType, S2Event,
-  TOOLTIP_OPERATOR_SORT_MENUS, EXTRA_FIELD, SortParam, CornerNodeType, TOOLTIP_OPERATOR_TABLE_SORT_MENUS
+  EXTRA_FIELD, SortParam, CornerNodeType, i18n
 } from "@antv/s2";
 import { Event as CanvasEvent } from '@antv/g-canvas';
 import { clone, first, isEqual, last } from "lodash";
@@ -11,6 +11,8 @@ import { GioPivotDataSet, GioCustomTreePivotDataSet } from "../data-set";
 import { CustomDataCell as GioDataCell } from '../cell/dataCell'
 import { CustomCornerCell } from "../cell/cornerCell";
 import { CustomColCell } from "../cell/colCell";
+import { getSortMenus, getTableSortMenus } from "../util/tooltip";
+
 
 export class CustomPivotSheet extends PivotSheet {
   public constructor(
@@ -79,6 +81,7 @@ export class CustomPivotSheet extends PivotSheet {
     const isCornerRow = meta.cornerType === CornerNodeType.Row;
     const { rows } = this.dataCfg.fields;
     const isFirstCol = meta.isPivotMode && isCornerRow && isEqual(first(rows), meta.field);
+
     const operator: TooltipOperatorOptions = {
       onClick: (arg) => {
         const { key } = arg as any;
@@ -87,7 +90,7 @@ export class CustomPivotSheet extends PivotSheet {
         // 排序事件完成触发
         this.emit(S2Event.RANGE_SORTED, event);
       },
-      menus: isFirstCol ? TOOLTIP_OPERATOR_TABLE_SORT_MENUS : TOOLTIP_OPERATOR_SORT_MENUS
+      menus: isFirstCol ? getTableSortMenus(i18n) : getSortMenus(i18n)
     };
 
     this.showTooltipWithInfo(event, [], {
@@ -131,7 +134,7 @@ export class CustomPivotSheet extends PivotSheet {
       ...this.dataCfg,
       sortParams: [...prevSortParams, sortParam],
     });
-    console.log('groupSort', meta.field, [...prevSortParams, sortParam])
+    // console.log('groupSort', meta.spreadsheet.facet.layoutResult, meta.spreadsheet.dataCfg.fields.rows, meta.field, [...prevSortParams, sortParam])
 
     this.render();
   }

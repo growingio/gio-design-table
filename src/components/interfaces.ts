@@ -12,7 +12,9 @@ import {
   HiddenColumnsInfo,
   ResizeParams,
   ResizeInfo,
-  Data
+  Data,
+  Conditions,
+  Condition
 } from '@antv/s2';
 import { Event as CanvasEvent } from '@antv/g-canvas';
 import { HeaderConfigProps } from './header';
@@ -149,10 +151,20 @@ export interface BaseSheetEventsProps {
 
 }
 export type ThemeConfig = Omit<GioThemeConfig, 'name'>
+
+export interface ConditionConfig extends Omit<Condition, 'mapping'> {
+  mapping?: Condition['mapping']
+}
+export interface ConditionsConfig extends Omit<Conditions, 'background'> {
+  background: ConditionConfig[]
+}
+export interface OptionsConfig extends Omit<GioS2Options, 'conditions'> {
+  conditions: ConditionsConfig
+}
 export interface BaseSheetProps extends BaseSheetEventsProps {
   spreadsheet?: (...args: S2Constructor) => SpreadSheet;
   dataConfig: GioS2DataConfig;
-  options: GioS2Options;
+  options: OptionsConfig;
   loading?: boolean;
 
   // partDrillDown?: PartDrillDown;

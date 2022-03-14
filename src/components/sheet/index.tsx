@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { SpreadSheet } from '@antv/s2';
+import { setEVALocale, SpreadSheet } from '@antv/s2';
+
 import { IntlProvider } from 'react-intl';
 import { DesignContext } from '@gio-design/utils';
 import { TableSheet } from './table-sheet';
@@ -7,6 +8,7 @@ import { SheetProps } from '../interfaces';
 import { PivotSheet } from './pivot-sheet';
 import en from '../../locales/en.json';
 
+setEVALocale('en-US');
 const MESSAGES: { [key: string]: any; } = {
   'en-US': en,
   en,
@@ -18,7 +20,9 @@ const Sheet = React.forwardRef(
     const { type = 'pivot', adaptive = true, ...restProps } = props;
     const context = useContext(DesignContext);
     const localeCode = context?.locale?.code || 'zh-CN';
-
+    React.useEffect(() => {
+      setEVALocale(localeCode)
+    }, [localeCode]);
     const sheetProps: SheetProps = React.useMemo(() => ({
       ...restProps,
       type,

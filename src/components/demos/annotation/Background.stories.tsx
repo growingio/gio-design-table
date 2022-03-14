@@ -42,12 +42,12 @@ export function Default() {
         background: [
           {
             field: 'number',
-            mapping() {
-              return {
-                // fill 是背景字段下唯一必须的字段，用于指定文本颜色
-                fill: '',
-              };
-            },
+            // mapping() {
+            //   return {
+            //     // fill 是背景字段下唯一必须的字段，用于指定文本颜色
+            //     fill: '',
+            //   };
+            // },
           },
         ],
       },
@@ -89,7 +89,7 @@ export const Simple1 = () => {
     }
     return (data.meta as any[])?.reduce((acc, cur) => {
       if (!cur.isDim) {
-        acc.background = [...acc.background, { field: cur.id, mapping() { return { fill: '' } } }]
+        acc.background = [...acc.background, { field: cur.id, }]
       }
       return acc;
     }, { background: [] });

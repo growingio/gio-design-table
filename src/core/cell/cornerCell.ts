@@ -10,9 +10,9 @@ import { GioS2DataConfig } from '..';
 
 export class CustomCornerCell extends CornerCell {
   protected isSortCell() {
-
+    const isTreeType = this.meta.spreadsheet.isHierarchyTreeType()
     const { field } = this.meta;
-    return this.meta.cornerType === CornerNodeType.Row && !isEqual(field, EXTRA_FIELD)
+    return this.meta.cornerType === CornerNodeType.Row && !isTreeType && !isEqual(field, EXTRA_FIELD)
       && !isEqual(field, SERIES_NUMBER_FIELD) && !isEqual(field, VALUE_FIELD);
 
   }
