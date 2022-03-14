@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/growingio/gio-design-table/compare/v1.0.0...v1.0.1) (2022-03-14)
+
+
+### Bug Fixes
+
+* **pivot-table:** 背景标注颜色标注错误 ([#10](https://github.com/growingio/gio-design-table/issues/10)) ([430df3d](https://github.com/growingio/gio-design-table/commit/430df3dfc24c2efacdb9cd66d680c783a542376c))
+
 # 1.0.0 (2022-03-04)
 
 
