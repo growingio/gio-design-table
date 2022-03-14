@@ -1,6 +1,7 @@
-import { Palette } from '@antv/s2'
+import { CELL_COLOR_MAP } from '../../common';
+import { ThemePalette } from '../../core';
 
-export const paletteDefault: Palette = {
+export const paletteDefault: ThemePalette = {
   // --------- basic colors -----------
   basicColors: [
     '#242E59',// gray5
@@ -14,16 +15,16 @@ export const paletteDefault: Palette = {
     '#3867F4',// blue2
     '#1248E9',// blue3
     '#5771A5',
-    '#DEE7FF',// positive1
-    '#BBCCFF',// positive2
-    '#8CA9FF',// positive3
-    '#4875FB',// positive4
-    '#1649DF',// positive5
-    '#FAF3B5',// negative1
-    '#F7EB81',// negative2
-    '#EDDD44',// negative3
-    '#D5C100',// negative4
-    '#AE9E03',// negative5
+    // '#DEE7FF',// positive1
+    // '#BBCCFF',// positive2
+    // '#8CA9FF',// positive3
+    // '#4875FB',// positive4
+    // '#1649DF',// positive5
+    // '#FAF3B5',// negative1
+    // '#F7EB81',// negative2
+    // '#EDDD44',// negative3
+    // '#D5C100',// negative4
+    // '#AE9E03',// negative5
   ],
 
   // ---------- semantic colors ----------
@@ -31,4 +32,5 @@ export const paletteDefault: Palette = {
     red: '#EC134B',
     green: '#16CB79',
   },
+  bgConditionColors: CELL_COLOR_MAP
 };

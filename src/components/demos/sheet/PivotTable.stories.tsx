@@ -1,13 +1,14 @@
-import { Data, SortParams } from '@antv/s2';
+import { Data } from '@antv/s2';
+import { Radio, RadioGroup } from '@gio-design/components';
 import { ComponentStory } from '@storybook/react';
 import { ChangeEventHandler, useRef, useState } from 'react';
-import { Adaptive, SheetProps } from '../..';
-import { DataTable } from '../sheet';
+import { Adaptive, SheetProps } from '../../..';
+import { DataTable } from '../../sheet';
 // import Docs from './Table.mdx';
-import dataCfg from './pivot-data'
+import dataCfg from '../pivot-data'
 
 export default {
-  title: 'DataTable/透视表 Pivot Table',
+  title: '表格形态/透视表 Pivot Table',
   argTypes: {
     backgroundColor: { control: 'color' },
   },
@@ -36,23 +37,17 @@ const options: SheetProps['options'] = {
       showTooltip: false,
     },
   },
+  totals: {
+    row: {
+      showGrandTotals: true,
+      showSubTotals: true,
+    },
+    col: {
+      showGrandTotals: true,
+      showSubTotals: true,
+    }
+  }
 
-  // totals: {
-  //   row: {
-  //     showGrandTotals: true,
-  //     showSubTotals: true,
-  //     reverseLayout: true,
-  //     reverseSubLayout: true,
-  //     subTotalsDimensions: ['province'],
-  //   },
-  //   col: {
-  //     showGrandTotals: true,
-  //     showSubTotals: true,
-  //     reverseLayout: true,
-  //     reverseSubLayout: true,
-  //     subTotalsDimensions: ['type'],
-  //   },
-  // },
 };
 Default.args = {
   options,
@@ -67,6 +62,7 @@ Default.args = {
     data: dataCfg.data,
     totalData: dataCfg.totalData as unknown as Data[]
   },
+  onCopied: (data) => { console.log('onCopied', data) }
 
 };
 export const Tree: ComponentStory<typeof DataTable> = () => {
@@ -76,14 +72,23 @@ export const Tree: ComponentStory<typeof DataTable> = () => {
       width: 600,
       height: 480,
       hierarchyType: 'tree',
-
+      totals: {
+        row: {
+          showGrandTotals: true,
+          showSubTotals: true,
+        },
+        col: {
+          showGrandTotals: true,
+          showSubTotals: true,
+        }
+      }
     },
     dataConfig: {
       fields: {
         rows: ['province', 'city'],
-        columns: ['type', 'sub_type'],
+        columns: ['sub_type'],
         values: ['number'],
-        valueInCols: true,
+        valueInCols: false,
       },
       meta: dataCfg.meta,
       data: dataCfg.data,
@@ -176,25 +181,32 @@ export function AdaptiveContainer() {
  * 字段标注-背景标注
  * @returns 
  */
-export function BackgroundAnnotation() {
+export function LayoutWidthType() {
+  const [layoutWidth, setLayoutWidth] = useState<string>('adaptive')
   const props: SheetProps = {
     type: 'pivot',
     options: {
       width: 600,
       height: 480,
       hierarchyType: 'grid',
-      conditions: {
-        background: [
-          {
-            field: 'number',
-            mapping() {
-              return {
-                // fill 是背景字段下唯一必须的字段，用于指定文本颜色
-                fill: '',
-              };
-            },
-          },
-        ],
+      style: {
+        layoutWidthType: layoutWidth as any
+      },
+      totals: {
+        row: {
+          showGrandTotals: true,
+          showSubTotals: true,
+          reverseLayout: true,
+          reverseSubLayout: true,
+          subTotalsDimensions: ['province'],
+        },
+        col: {
+          showGrandTotals: true,
+          showSubTotals: true,
+          reverseLayout: true,
+          reverseSubLayout: true,
+          subTotalsDimensions: ['type'],
+        },
       },
     },
     dataConfig: {
@@ -208,9 +220,22 @@ export function BackgroundAnnotation() {
       data: dataCfg.data,
       totalData: dataCfg.totalData as any
     },
-    onSortChange: (params: SortParams) => { console.log('onSortChange', params) }
   }
   return (<div className='table-demo-box'>
+    <RadioGroup
+      onChange={(e) => { setLayoutWidth(e.target.value) }}
+      value={layoutWidth}
+    >
+      <Radio value="adaptive">
+        adaptive:行列等宽
+      </Radio>
+      <Radio value="colAdaptive">
+        colAdaptive:列等宽,行头紧凑布局
+      </Radio>
+      <Radio value="compact">
+        compact:行列紧凑布局
+      </Radio>
+    </RadioGroup>
     <DataTable {...props} />
   </div>)
 }

@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
-import { S2Options } from '@antv/s2';
 import * as mockDataConfig from './data/simple-data.json';
 import { DataTable } from '..';
+import { OptionsConfig } from '../..';
 
-const s2Options: S2Options = {
+const s2Options: OptionsConfig = {
   width: 600,
   height: 600,
   hierarchyType: 'grid',

@@ -1,6 +1,8 @@
 import { isEmpty, map } from 'lodash';
+import React, { useEffect, useState } from 'react';
 import {
   S2CellType,
+  SortParam,
   TooltipOperatorMenu,
   TooltipOperatorOptions,
 } from '@antv/s2';
@@ -16,7 +18,7 @@ const { Item } = List;
 interface TooltipOperatorProps extends TooltipOperatorOptions {
   onlyMenu?: boolean;
   cell: S2CellType;
-  // onClick: (...args: unknown[]) => void;
+  // onClick?: (...args: unknown[]) => void;
 }
 
 /**
@@ -29,6 +31,11 @@ interface TooltipOperatorProps extends TooltipOperatorOptions {
 export function TooltipOperator(props: TooltipOperatorProps) {
   const { menus, onlyMenu, onClick: onMenuClick, cell } = props;
   const tooltipPrefixCls = usePrefixCls(TOOLTIP_PREFIX_CLS);
+  const sortParam: SortParam = (cell as any).headerConfig?.sortParam;
+  const [currentValue, setValue] = useState<string | undefined>()
+  useEffect(() => {
+    setValue(sortParam?.sortMethod)
+  }, [sortParam?.sortMethod]);
 
   const renderTitle = (menu: TooltipOperatorMenu) => {
     const icon = menu.icon && (<Icon
@@ -37,8 +44,7 @@ export function TooltipOperator(props: TooltipOperatorProps) {
     />);
     return (
       <Item value={menu.key} prefix={icon}
-        onClick={(v, e) => {
-          console.log('list item click===>', v, e, cell)
+        onClick={() => {
           menu.onClick?.(cell)
         }}>
         {menu.text}
@@ -65,12 +71,14 @@ export function TooltipOperator(props: TooltipOperatorProps) {
 
   const renderMenus = () => {
     if (onlyMenu) {
+
       return (
         <List
+          value={currentValue}
           className={`${tooltipPrefixCls}-operator-menus`}
-          onClick={(v, e) => {
-            console.log('list onlyMenu click', v, e)
-            onMenuClick?.(v, e)
+          onClick={(key, e) => {
+            setValue(key as string);
+            onMenuClick?.({ key }, cell, e)
           }}
         >
           {map(menus, (operatorMenu: TooltipOperatorMenu) => renderMenu(operatorMenu))}
@@ -83,7 +91,9 @@ export function TooltipOperator(props: TooltipOperatorProps) {
       const menuRender = !isEmpty(children) ? (
         <List
           className={`${tooltipPrefixCls}-operator-menus`}
-          onClick={onMenuClick}
+          onClick={(_key, e) => {
+            onMenuClick?.({ key: _key }, cell, e)
+          }}
         >
           {map(menus, (operatorMenu: TooltipOperatorMenu) => renderMenu(operatorMenu))}
         </List>

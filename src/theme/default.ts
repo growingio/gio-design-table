@@ -102,8 +102,8 @@ export const themeDefault: ThemeConfig = {
           },
           // -------------- selected -------------------
           selected: {
-            backgroundColor: basicColors[7],
-            backgroundOpacity: 0.3,
+            backgroundColor: basicColors[10],
+            backgroundOpacity: 0.4,
           },
           // -------------- unselected -------------------
           unselected: {
@@ -170,8 +170,8 @@ export const themeDefault: ThemeConfig = {
           },
           // -------------- selected -------------------
           selected: {
-            backgroundColor: basicColors[7],
-            backgroundOpacity: 0.3,
+            backgroundColor: basicColors[10],
+            backgroundOpacity: 0.4,
           },
           // -------------- unselected -------------------
           unselected: {
@@ -249,8 +249,8 @@ export const themeDefault: ThemeConfig = {
           },
           // -------------- selected -------------------
           selected: {
-            backgroundColor: basicColors[7],
-            backgroundOpacity: 0.6,
+            backgroundColor: basicColors[10],
+            backgroundOpacity: 0.4,
           },
           // -------------- unselected -------------------
           unselected: {

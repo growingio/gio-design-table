@@ -1,12 +1,12 @@
 import { ComponentStory } from '@storybook/react';
 import { useMemo, useState } from 'react';
 import { useEffect } from '@storybook/addons';
-import { SheetProps } from '../..';
-import { DataTable } from '../sheet';
-import { prod } from './simple-data'
+import { SheetProps } from '../../..';
+import { DataTable } from '../../sheet';
+import { prod } from '../simple-data'
 
 export default {
-  title: 'DataTable/明细表 Table',
+  title: '表格形态/明细表 Table',
   argTypes: {
     backgroundColor: { control: 'color' },
   },
@@ -26,6 +26,18 @@ export const Default = Template.bind({});
 const options = {
   width: 600,
   height: 480,
+  conditions: {
+    background: [
+      {
+        field: 'price',
+        mapping() {
+          return {
+            fill: ''
+          }
+        }
+      }
+    ]
+  }
 };
 Default.args = {
   options,
@@ -54,6 +66,7 @@ Default.args = {
       },
     ],
     data: prod as any,
+    sortMeta: [{ field: 'city', canSort: false }]
   },
   type: 'table'
 }
@@ -181,6 +194,7 @@ export const ShowSeriesNumber: ComponentStory<typeof DataTable> = () => {
     width: 600,
     height: 480,
     showSeriesNumber: true,
+
   };
   return <div
     className='table-demo-box'>

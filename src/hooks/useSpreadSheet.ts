@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
-  PivotSheet,
   S2Constructor,
   S2Options,
   SpreadSheet,
-  TableSheet,
 } from '@antv/s2';
 import React, { useCallback, useEffect, useRef } from 'react';
-import type { BaseSheetProps, SheetType } from '../interfaces';
+import { CustomPivotSheet, CustomTableSheet } from '../core/sheet-type';
+import type { BaseSheetProps, SheetType } from '../components/interfaces';
 import { themeDefault } from '../theme';
-import { getSheetComponentOptions } from '../utils';
+import { getSheetComponentOptions, getSheetConditionsOption } from '../utils';
 import { useEvents } from './useEvents';
 import { useForceUpdate } from './useForceUpdate';
 import { useLoading } from './useLoading';
@@ -39,19 +38,26 @@ export const useSpreadSheet = (
   const prevOptions = usePrevious(options);
   const prevThemeCfg = usePrevious(themeConfig);
   const forceUpdate = useForceUpdate();
-
   useEvents(props, s2Ref.current);
+  function getOptions(_options: BaseSheetProps['options']) {
+    // 此处将扩展的背景标注参数 转换为S2 可识别的参数
+    const conditions = getSheetConditionsOption((_options as BaseSheetProps['options']).conditions)
+    const s2Options = getSheetComponentOptions(_options, { conditions });
+    return s2Options;
+  }
   const renderSpreadSheet = useCallback(
     (container: HTMLDivElement) => {
-      const s2Options = config.s2Options || getSheetComponentOptions(options);
+      // 此处将扩展的背景标注参数 转换为S2 可识别的参数
+      const s2Options = getOptions(options);
+      // const s2Options = config.s2Options || getSheetComponentOptions(options);
       const s2ConstructorArgs: S2Constructor = [container, dataConfig, s2Options];
       if (customSpreadSheet) {
         return customSpreadSheet(...s2ConstructorArgs);
       }
       if (config.sheetType === 'table') {
-        return new TableSheet(container, dataConfig, s2Options);
+        return new CustomTableSheet(container, dataConfig, s2Options);
       }
-      return new PivotSheet(container, dataConfig, s2Options);
+      return new CustomPivotSheet(container, dataConfig, s2Options);
     },
     [config.s2Options, config.sheetType, options, dataConfig, customSpreadSheet],
   );
@@ -62,6 +68,7 @@ export const useSpreadSheet = (
     s2Ref.current.setThemeCfg(themeConfig);
     s2Ref.current.render();
     setLoading(false);
+    // 子hook 依赖了s2Ref.current ，需要强制刷新，以便子hook 触发rerender
     forceUpdate();
   }, [props, renderSpreadSheet, setLoading, config, forceUpdate]);
 
@@ -89,12 +96,18 @@ export const useSpreadSheet = (
         reloadData = true;
         s2Ref.current?.setDataCfg(dataConfig);
       }
-      s2Ref.current?.setOptions(options);
+      // 此处将扩展的背景标注参数 转换为S2 可识别的参数
+      const s2Options = getOptions(options);
+      s2Ref.current?.setOptions(s2Options);
     }
     if (!Object.is(prevThemeCfg, themeConfig)) {
       s2Ref.current?.setThemeCfg(themeConfig);
     }
+
     s2Ref.current?.render(reloadData, reBuildDataSet);
+    if (reloadData || reBuildDataSet) {
+      forceUpdate();
+    }
   }, [dataConfig, options, prevDataCfg, prevOptions, prevThemeCfg, themeConfig]);
 
   useResize({

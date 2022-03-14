@@ -8,6 +8,7 @@ import {
   TooltipHeadInfo as TooltipHeadInfoType,
   TooltipInterpretationOptions,
   getTooltipDefaultOptions,
+  setEVALocale
 } from '@antv/s2';
 import { DesignContext } from '@gio-design/utils';
 import { IntlProvider } from 'react-intl';
@@ -34,6 +35,10 @@ export function TooltipComponent(props: TooltipRenderProps) {
   const { data, options, content, cell } = props;
   const context = useContext(DesignContext);
   const localeCode = context?.locale?.code || 'zh-CN';
+
+  React.useEffect(() => {
+    setEVALocale(localeCode)
+  }, [localeCode]);
   const renderDivider = () => <Divider />;
 
   const renderOperation = (
@@ -80,7 +85,6 @@ export function TooltipComponent(props: TooltipRenderProps) {
 
   const renderContent = () => {
     const option = getTooltipDefaultOptions(options);
-    console.log('tooltip renderContent', option)
     const { operator, onlyMenu } = option;
     const { summaries, headInfo, details, interpretation, infos, tips, name } =
       data || {};
