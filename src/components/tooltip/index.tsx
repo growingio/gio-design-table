@@ -38,8 +38,7 @@ export function TooltipComponent(props: TooltipRenderProps) {
   const localeCode = context?.locale?.code || 'zh-CN';
 
   React.useEffect(() => {
-    setEVALocale('en_US')
-    console.log('i18n ', i18n('组内升序'))
+    setEVALocale(localeCode)
   }, [localeCode]);
   const renderDivider = () => <Divider />;
 
