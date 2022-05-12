@@ -2,6 +2,7 @@
 import React, { useCallback, useLayoutEffect, useEffect, useState } from 'react';
 import { debounce, round } from 'lodash';
 import type { SpreadSheet } from '@antv/s2';
+import ResizeObserver from 'resize-observer-polyfill';
 import { Adaptive } from '../components/interfaces';
 
 export interface UseResizeEffectProps {
@@ -101,9 +102,7 @@ export const useResize = (props: UseResizeEffectProps) => {
       }
     });
 
-    resizeObserver.observe(wrapper, {
-      box: 'border-box',
-    });
+    resizeObserver.observe(wrapper);
 
     return () => {
       // container可能为外层容器 这里仅unobserve
