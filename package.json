@@ -1,6 +1,6 @@
 {
   "name": "@gio-design/s2-table",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Pivot table base on @antv/s2 ",
   "repository": "git@github.com:growingio/gio-design-table.git",
   "author": "GrowingIO Frontend Team <eng-frontend@growingio.com>",

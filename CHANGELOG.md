@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/growingio/gio-design-table/compare/v1.0.1...v1.0.2) (2022-05-18)
+
+
+### Bug Fixes
+
+* **useresize:** fix ResizeObserver compatibility ([#25](https://github.com/growingio/gio-design-table/issues/25)) ([78bf559](https://github.com/growingio/gio-design-table/commit/78bf559973f6eec2741b22a6cd788e52766854a1))
+
 ## [1.0.1](https://github.com/growingio/gio-design-table/compare/v1.0.0...v1.0.1) (2022-03-14)
 
 
